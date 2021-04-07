@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Ex3 {
+public class Ex3_old {
     static String[] name = {"Long", "Thanh", "Duyet", "Tri", "Quan", ""};
     static String[] id = {"1", "2", "3", "4", "5", ""};
     static String[] dOb = {"1/1", "2/2", "3/3", "4/4", "5/5", ""};
@@ -137,21 +137,21 @@ public class Ex3 {
     static void maxMark() {
         int max = mark[0];
         int index = 0;
-        for (int i = 0 ; i < mark.length;i++) {
+        for (int i = 0; i < mark.length; i++) {
             if (max < mark[i]) {
                 max = mark[i];
-                index  = i;
+                index = i;
             }
         }
-        System.out.println("Sinh viên có điểm cao nhất là "+ name[index]);
+        System.out.println("Sinh viên có điểm cao nhất là " + name[index]);
     }
 
-    static void sortMark(){
+    static void sortMark() {
         String tempName = "";
-        String tempID ="";
+        String tempID = "";
         int tempMark = 0;
-        for (int i = 0 ; i < mark.length-1; i++){
-            for  (int j = i+1; j < mark.length; j++){
+        for (int i = 0; i < mark.length - 1; i++) {
+            for (int j = i + 1; j < mark.length; j++) {
                 if (mark[i] < mark[j]) {
                     tempName = name[i];
                     name[i] = name[j];
