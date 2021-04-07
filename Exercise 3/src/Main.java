@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Student student1 = new Student(1, "Long", "28/12", 8);
-        Student student2 = new Student(2, "Thanh", "1/1", 9);
-        Student student3 = new Student(3, "Tri", "3/3", 10);
-        Student student4 = new Student(4, "Duyet", "2/9", 7);
+        Student student1 = new Student(1, "Hai Long", "28/12", 8);
+        Student student2 = new Student(2, "Quoc Thanh", "1/1", 9);
+        Student student3 = new Student(3, "Minh Tri", "3/3", 10);
+        Student student4 = new Student(4, "The Duyet", "2/9", 7);
         Student student5 = new Student();
         Student student6 = new Student();
         Scanner sc = new Scanner(System.in);

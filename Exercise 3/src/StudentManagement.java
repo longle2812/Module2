@@ -2,12 +2,15 @@ import java.util.Scanner;
 
 public class StudentManagement {
     public void getAllStudent(Student[] student) {
-        System.out.printf("%2s %20s %10s %4s","id","Họ và tên","Ngày sinh","Điểm");
+        System.out.println("**********************************");
+        System.out.printf("%2s %13s %10s %4s \n","id","Họ và tên","Ngày sinh","Điểm");
         for (int i = 0; i < student.length; i++) {
             if (student[i].getId() != 0) {
-                System.out.printf("%d %6s %6s %2d \n",student[i].getId(),student[i].getName(),student[i].getDob(),student[i].getMark());
+                System.out.printf("%d %13s %10s %4d \n",student[i].getId(),student[i].getName(),student[i].getDob(),student[i].getMark());
             }
         }
+        System.out.println("**********************************");
+        System.out.println("Bấm phím bất kỳ để tiếp tục ...");
     }
 
     public void addNewStudent(Student[] student) {
@@ -22,6 +25,8 @@ public class StudentManagement {
         student[index].setDob(sc.nextLine());
         System.out.println("3. Nhập điểm thi:");
         student[index].setMark(sc.nextInt());
+        getAllStudent(student);
+        System.out.println("Bấm phím bất kỳ để tiếp tục ...");
     }
 
     public void editStudentInfo(Student[] student) {
@@ -29,7 +34,7 @@ public class StudentManagement {
         System.out.println("Nhập ID sinh viên:");
         int editID = sc.nextInt();
         for (int i = 0; i < student.length; i++) {
-            if (editID == student[i].getId() + 1) {
+            if (editID == student[i].getId()) {
                 System.out.println("Bạn muốn sửa thông tin nào");
                 System.out.println("1. Họ tên");
                 System.out.println("2. Ngày tháng năm sinh");
@@ -55,7 +60,8 @@ public class StudentManagement {
                 break;
             }
         }
-
+        getAllStudent(student);
+        System.out.println("Done! Bấm phím bất kỳ để tiếp tục ...");
     }
 
     public void deleteStudent(Student[] student) {
@@ -89,6 +95,8 @@ public class StudentManagement {
         student[Student.totalStudent].setId(0);
         student[Student.totalStudent].setName("");
         student[Student.totalStudent].setDob("");
+        getAllStudent(student);
+        System.out.println("Done! Bấm phím bất kỳ để tiếp tục ...");
     }
 
     public void findMaxMark(Student[] student) {
@@ -105,6 +113,7 @@ public class StudentManagement {
             }
         }
         System.out.println();
+        System.out.println("Done! Bấm phím bất kỳ để tiếp tục ...");
     }
 
     public void sortStudentMark(Student[] student){
@@ -134,5 +143,7 @@ public class StudentManagement {
                 }
             }
         }
+        getAllStudent(student);
+        System.out.println("Done! Bấm phím bất kỳ để tiếp tục ...");
     }
 }
