@@ -3,14 +3,16 @@ public class Student {
     public String name;
     public String dob;
     public int mark;
-    public static int totalStudent = 4;
-    public static int lastID = 4;
+    public static int totalStudent = 0;
+    public static int lastID = 0;
 
     public Student(int id, String name, String dob, int mark) {
         this.id = id;
         this.name = name;
         this.dob = dob;
         this.mark = mark;
+        lastID++;
+        totalStudent++;
     }
 
     public Student() {
