@@ -21,6 +21,10 @@ public class NhanVienParttime extends NhanVien{
         this.time = time;
     }
 
+    public double getLuongThucLinh() {
+        return this.time* 100000;
+    }
+
     @Override
     public String toString() {
         return super.toString()+

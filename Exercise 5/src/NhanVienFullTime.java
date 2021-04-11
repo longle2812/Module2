@@ -43,6 +43,9 @@ public class NhanVienFullTime extends NhanVien{
         LuongCung = luongCung;
     }
 
+    public double getLuongThucLinh() {
+        return this.getLuongCung() + (this.getTienThuong() - this.getTienPhat());
+    }
     @Override
     public String toString() {
         return super.toString()+
