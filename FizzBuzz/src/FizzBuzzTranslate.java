@@ -1,11 +1,15 @@
 public class FizzBuzzTranslate {
     public static String fizzBuzzTranslate(int number) {
         String result = "";
-        if (number > 0 && number < 10) {
+        boolean isLessThan10 = number > 0 && number < 10;
+        boolean isLessThan100 = number < 100;
+
+        if (isLessThan10) {
             result = readSmallNumber(number);
-        }
-        else if (number < 100) {
-            result = readLargeNumber(number);
+        } else {
+            if (isLessThan100) {
+                result = readLargeNumber(number);
+            }
         }
         return result;
     }
@@ -45,12 +49,11 @@ public class FizzBuzzTranslate {
         }
         if (phanDonVi == 0) {
             return result;
-        }
-        else return result + " " + readSmallNumber(phanDonVi);
+        } else return result + " " + readSmallNumber(phanDonVi);
     }
 
     private static String readSmallNumber(int number) {
-        String result ="";
+        String result = "";
         switch (number) {
             case 0:
                 break;

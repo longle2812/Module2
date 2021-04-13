@@ -1,31 +1,29 @@
-public class FizzBuzz {
+public class FizzBuzz implements ConstStorage {
     public static String fizzBuzzTest(int number) {
-        String result = "";
-        if (isDivisibleBy35(number)) {
-            result = "FizzBuzz";
+        String result;
+//        boolean isDivisibleBy3 = number % 3 == 0;
+//        boolean isDivisibleBy5 = number % 5 == 0;
+//        boolean isDivisibleBy3And5 = isDivisibleBy3 && isDivisibleBy5;
+
+        if (isDivisibleBy3And5(number)) {
+            result = fizzBuzz;
         } else if (isDivisibleBy3(number)) {
-            result = "Fizz";
+            result = fizz;
         } else if (isDivisibleBy5(number)) {
-            result = "Buzz";
+            result = buzz;
         } else result = String.valueOf(number);
         return result;
     }
 
     private static boolean isDivisibleBy5(int number) {
-        if (number % 5 == 0) {
-            return true;
-        } else return false;
+        return number % 5 == 0;
     }
 
     private static boolean isDivisibleBy3(int number) {
-        if (number % 3 == 0) {
-            return true;
-        } else return false;
+        return number % 3 == 0;
     }
 
-    private static boolean isDivisibleBy35(int number) {
-        if (number % 3 == 0 && number % 5 == 0) {
-            return true;
-        } else return false;
+    private static boolean isDivisibleBy3And5(int number) {
+        return number % 3 == 0 && number % 5 == 0;
     }
 }
