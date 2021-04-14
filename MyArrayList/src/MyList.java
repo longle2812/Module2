@@ -42,7 +42,7 @@ public class MyList<E> {
         return temp;
     }
 
-    public int indexOf(E o){
+    public int indexOf(E o) {
         int result = -1;
         for (int i = 0; i < elements.length; i++) {
             if (elements[i].equals(o)) {
@@ -60,7 +60,7 @@ public class MyList<E> {
         return elements;
     }
 
-    public boolean contains(E o){
+    public boolean contains(E o) {
         boolean check = false;
         for (int i = 0; i < elements.length; i++) {
             if (elements[i].equals(o)) {
@@ -71,15 +71,15 @@ public class MyList<E> {
         return check;
     }
 
-    public boolean add(E e){
+    public boolean add(E e) {
         return true;
     }
 
-    public E get(int i){
+    public E get(int i) {
         return (E) elements[i];
     }
 
-    public void clear(){
+    public void clear() {
         elements = new Object[DEFAULT_CAPACITY];
     }
 
