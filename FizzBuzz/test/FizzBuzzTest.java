@@ -38,4 +38,12 @@ class FizzBuzzTest {
         String result = FizzBuzz.fizzBuzzTest(number);
         assertEquals(expected, result);
     }
+
+    @org.junit.jupiter.api.Test
+    void fizzBuzzTest5() {
+        int number = Integer.MAX_VALUE;
+        String expected = "2147483647";
+        String result = FizzBuzz.fizzBuzzTest(number);
+        assertEquals(expected, result);
+    }
 }
