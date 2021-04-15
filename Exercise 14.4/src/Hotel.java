@@ -35,7 +35,7 @@ public class Hotel {
         return priceOfRoom;
     }
 
-    public Person getHuman() {
+    public Person getPerson() {
         return person;
     }
 

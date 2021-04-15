@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class HotelManagement {
@@ -12,12 +14,12 @@ public class HotelManagement {
     public static final String MONEY_TO_PAY_MESSAGE = "Cần phải trả ";
     public static final String DELETE_ID_INPUT = "Nhập ID cần xoá";
     private int numberOfCustomer = 5;
-    public Hotel[] hotels = new Hotel[numberOfCustomer];
+    public List<Hotel> hotels = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
 
     public void displayInfo() {
-        for (int i = 0; i < numberOfCustomer; i++) {
-            System.out.println(hotels[i]);
+        for (int i = 0; i < hotels.size(); i++) {
+            System.out.println(hotels.get(i));
         }
     }
 
@@ -27,11 +29,11 @@ public class HotelManagement {
         Person person3 = new Person("Duyet", "28/12", "036815132");
         Person person4 = new Person("Thao", "28/12", "185433531");
         Person person5 = new Person("Tri", "28/12", "095612313");
-        hotels[0] = new Hotel(10, "Basic", 1000, person1);
-        hotels[1] = new Hotel(11, "VIP1", 1500, person2);
-        hotels[2] = new Hotel(104, "Basic", 1000, person3);
-        hotels[3] = new Hotel(30, "VIP2", 2000, person4);
-        hotels[4] = new Hotel(50, "Basic", 1000, person5);
+        hotels.add(new Hotel(10, "Basic", 1000, person1));
+        hotels.add(new Hotel(11, "VIP1", 1500, person2));
+        hotels.add(new Hotel(104, "Basic", 1000, person3));
+        hotels.add(new Hotel(30, "VIP2", 2000, person4));
+        hotels.add(new Hotel(50, "Basic", 1000, person5));
     }
 
     public void addNewCustomer() {
@@ -48,38 +50,22 @@ public class HotelManagement {
         System.out.println(TYPE_OF_ROOM_INPUT);
         String typeOfRoomInput = sc.nextLine();
         System.out.println(PRICE_OF_ROOM_INPUT);
-        long price = sc.nextLong();
-        numberOfCustomer++;
-        Hotel[] hotels1 = new Hotel[numberOfCustomer];
-        for (int i = 0; i < hotels.length; i++) {
-            hotels1[i] = hotels[i];
-        }
-        hotels1[hotels1.length - 1] = new Hotel(days, typeOfRoomInput, price, person);
-        hotels = hotels1;
+        Long priceOfRoomInput = sc.nextLong();
+        hotels.add(new Hotel(days, typeOfRoomInput, priceOfRoomInput, person));
     }
 
     public void deleteInfo() {
         System.out.println(DELETE_ID_INPUT);
         String deleteID = sc.nextLine();
-        int deleteIdNumber = -1;
-        for (int i = 0; i < numberOfCustomer; i++) {
-            if (hotels[i].getHuman().getIdNumber().equals(deleteID)) {
-                deleteIdNumber = i;
-                break;
+        boolean isTrueID = false;
+        for (int i = 0; i < hotels.size(); i++) {
+            if (hotels.get(i).getPerson().getIdNumber().equals(deleteID)) {
+                hotels.remove(i);
+                isTrueID = false;
             }
         }
-        if (deleteIdNumber == -1) {
+        if (!isTrueID) {
             System.out.println(CANNOT_FIND_ID);
-        } else {
-            Hotel[] hotels1 = new Hotel[numberOfCustomer - 1];
-            for (int i = 0; i < deleteIdNumber; i++) {
-                hotels1[i] = hotels[i];
-            }
-            for (int i = deleteIdNumber; i < numberOfCustomer - 1; i++) {
-                hotels1[i] = hotels[i + 1];
-            }
-            hotels = hotels1;
-            numberOfCustomer--;
         }
     }
 
@@ -87,18 +73,15 @@ public class HotelManagement {
     public void caculateMoney() {
         System.out.println(PAY_ID_INPUT);
         String payID = sc.nextLine();
-        int payIdNumber = -1;
-        for (int i = 0; i < numberOfCustomer; i++) {
-            if (hotels[i].getHuman().getIdNumber().equals(payID)) {
-                payIdNumber = i;
+        double moneyToPay = -1;
+        for (int i = 0; i < hotels.size(); i++) {
+            if (hotels.get(i).getPerson().getIdNumber().equals(payID)) {
+                moneyToPay = hotels.get(i).getPriceOfRoom() * hotels.get(i).getRentDay();
             }
         }
-        if (payIdNumber == -1) {
+        if (moneyToPay == -1) {
             System.out.println(CANNOT_FIND_ID);
         } else {
-            double priceOfRoom = hotels[payIdNumber].getPriceOfRoom();
-            double numberOfLodging = hotels[payIdNumber].getRentDay();
-            double moneyToPay = priceOfRoom * numberOfLodging;
             System.out.println(MONEY_TO_PAY_MESSAGE + moneyToPay);
         }
     }
