@@ -1,3 +1,7 @@
+package HotelManagement;
+
+import HotelManagement.HotelManagement;
+
 import java.util.Scanner;
 
 public class Main {

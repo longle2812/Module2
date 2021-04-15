@@ -1,3 +1,5 @@
+package HotelManagement;
+
 public class Hotel {
     private int rentDay;
     private String typeOfRoom;
@@ -45,7 +47,7 @@ public class Hotel {
 
     @Override
     public String toString() {
-        return "Hotel{" +
+        return "HotelManagement.HotelManagement.Hotel{" +
                 "numberInLodging=" + rentDay +
                 ", typeOfRoom='" + typeOfRoom + '\'' +
                 ", priceOfRoom=" + priceOfRoom +
