@@ -65,7 +65,7 @@ public class HotelManagement {
 //                hotels.remove(i);
 //                isTrueID = false;
 //            }
-//        }
+//        } 2 cach
         for (Hotel hotel:
              hotels) {
             if (hotel.getPerson().getIdNumber().equals(deleteID)) {
