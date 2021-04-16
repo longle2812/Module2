@@ -83,7 +83,6 @@ public class MyList<E> {
         elements = new Object[DEFAULT_CAPACITY];
     }
 
-
     @Override
     public String toString() {
         return "MyList{" +

@@ -60,10 +60,18 @@ public class HotelManagement {
         System.out.println(DELETE_ID_INPUT);
         String deleteID = sc.nextLine();
         boolean isTrueID = false;
-        for (int i = 0; i < hotels.size(); i++) {
-            if (hotels.get(i).getPerson().getIdNumber().equals(deleteID)) {
-                hotels.remove(i);
-                isTrueID = false;
+//        for (int i = 0; i < hotels.size(); i++) {
+//            if (hotels.get(i).getPerson().getIdNumber().equals(deleteID)) {
+//                hotels.remove(i);
+//                isTrueID = false;
+//            }
+//        }
+        for (Hotel hotel:
+             hotels) {
+            if (hotel.getPerson().getIdNumber().equals(deleteID)) {
+                hotels.remove((Hotel) hotel);
+                isTrueID = true;
+                break;
             }
         }
         if (!isTrueID) {
