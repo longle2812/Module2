@@ -5,6 +5,7 @@ public class MyListTest {
         myList.add(1, 2);
         myList.add(2, 3);
         myList.add(3, 4);
+        myList.add(3, 4);
         System.out.println(myList);
         System.out.println(myList.contains(3));
         System.out.println(myList.remove(3));
