@@ -5,10 +5,10 @@ public class Main {
     public static void main(String[] args) {
         PersonManagement personManagement = new PersonManagement();
         personManagement.init();
-        chocies(personManagement);
+        choices(personManagement);
     }
 
-    private static void chocies(PersonManagement personManagement) {
+    private static void choices(PersonManagement personManagement) {
         int choice;
         do {
             displayMenu();
