@@ -12,26 +12,29 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 
     @Override
     public boolean insert(E e) {
-        if (root == null)
-            root = createNewNode(e); /*create a new root*/
-        else {
-            /*locate the parent node*/
-            TreeNode<E> parent = null;
+        if (root == null) {
+            root = createNewNode(e);
+        } else {
+            TreeNode<E> parent = root;
             TreeNode<E> current = root;
             while (current != null) {
                 if (e.compareTo(current.element) < 0) {
                     parent = current;
                     current = current.left;
-                } else if (e.compareTo(current.element) > 0) {
+                }
+                else if (e.compareTo(current.element) > 0) {
                     parent = current;
                     current = current.right;
-                } else
-                    return false; /*Duplicate node not inserted*/
+                }
+                else
+                    return false;
             }
-            if (e.compareTo(parent.element) < 0)
+            if (e.compareTo(parent.element) < 0) {
                 parent.left = createNewNode(e);
-            else
+            }
+            else if (e.compareTo(parent.element) > 0) {
                 parent.right = createNewNode(e);
+            }
         }
         size++;
         return true; /*element inserted successfully*/
@@ -67,24 +70,23 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
         TreeNode<E> current = root;
         boolean check = false;
         while (current != null && !check) {
-            if (element.compareTo(current.element) < 0){
+            if (element.compareTo(current.element) < 0) {
                 current = current.left;
-            }
-            else if (element.compareTo(current.element) > 0) {
+            } else if (element.compareTo(current.element) > 0) {
                 current = current.right;
-            }
-            else if (element == current.element) {
+            } else if (element == current.element) {
                 check = true;
             }
         }
         return check;
     }
 
-    public void postorder(TreeNode root){
+    public void postorder(TreeNode root) {
         if (root != null) {
             postorder(root.left);
             postorder(root.right);
             System.out.println(root.element + " ");
         }
     }
+
 }

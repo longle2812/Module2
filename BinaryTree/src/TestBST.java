@@ -9,9 +9,9 @@ public class TestBST {
         tree.insert(6);
         tree.insert(7);
         //traverse tree
-        tree.inorder();
-//        tree.postorder();
+//        tree.inorder();
+        tree.postorder();
         System.out.println("The number of nodes is: " + tree.getSize());
-        System.out.println(tree.search(1));
+        System.out.println(tree.search(2));
     }
 }
