@@ -155,12 +155,19 @@ public class DocManagement {
         int high = documents.size() - 1;
         while (low <= high) {
             int mid = (low + high) / 2;
-            if (documents.get(mid).getId() == findID) {
+            boolean midValueEqualFindID = documents.get(mid).getId() == findID;
+            if (midValueEqualFindID) {
                 return documents.get(mid);
-            } else if (documents.get(mid).getId() < findID) {
-                low = mid + 1;
-            } else if (documents.get(mid).getId() > findID) {
-                high = mid - 1;
+            } else {
+                boolean midValueSmallerThanFindID = documents.get(mid).getId() < findID;
+                if (midValueSmallerThanFindID) {
+                    low = mid + 1;
+                } else {
+                    boolean midValueLargerThanFindID = documents.get(mid).getId() > findID;
+                    if (midValueLargerThanFindID) {
+                        high = mid - 1;
+                    }
+                }
             }
         }
         return null;
@@ -171,8 +178,8 @@ public class DocManagement {
             int position = i;
             Document temp = documents.get(i);
             while (position > 0) {
-                boolean isTempSmallerThanPosition = (temp.getPublisher().compareTo(documents.get(position - 1).getPublisher())) < 0;
-                if (!isTempSmallerThanPosition) break;
+                boolean isTempSmallerThanCurrentPosition = (temp.getPublisher().compareTo(documents.get(position - 1).getPublisher())) < 0;
+                if (!isTempSmallerThanCurrentPosition) break;
                 documents.set(position, documents.get(position - 1));
                 position--;
             }
