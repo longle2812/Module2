@@ -1,3 +1,4 @@
+import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -141,16 +142,15 @@ public class DocManagement {
     }
 
     public void findDocumentByID() {
-        Document result = new Document();
         System.out.println(ENTER_ID);
         int findID = sc.nextInt();
-        result = binarySearch(result, findID);
+        Document result = binarySearch(findID);
         if (result != null) {
             displayByType(result);
         } else System.out.println(NO_INFORMATION);
     }
 
-    private Document binarySearch(Document result, int findID) {
+    private Document binarySearch(int findID) {
         int low = 0;
         int high = documents.size() - 1;
         while (low <= high) {
