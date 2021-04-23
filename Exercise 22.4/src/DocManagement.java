@@ -29,12 +29,12 @@ public class DocManagement {
     private String monthEdition;
 
     public void init() {
-        documents.add(new Book(1, "Long", 2, "banana", 200));
-        documents.add(new Book(2, "Thanh", 5, "thanhdq", 150));
+        documents.add(new Book(6, "Long", 2, "banana", 200));
+        documents.add(new Book(1, "Thanh", 5, "thanhdq", 150));
         documents.add(new Magazine(3, "Duyet", 3, 2, "09/2020"));
-        documents.add(new Magazine(4, "Thao", 9, 4, "10/2021"));
-        documents.add(new Newspaper(5, "Tri", 10, "04/03/2020"));
-        documents.add(new Newspaper(6, "Ngoc Anh", 11, "08/06/2000"));
+        documents.add(new Magazine(5, "Thao", 9, 4, "10/2021"));
+        documents.add(new Newspaper(4, "Tri", 10, "04/03/2020"));
+        documents.add(new Newspaper(2, "Ngoc Anh", 11, "08/06/2000"));
     }
 
     public void displayInfo() {
@@ -142,12 +142,28 @@ public class DocManagement {
     }
 
     public void findDocumentByID() {
+        sortDocumentByID();
         System.out.println(ENTER_ID);
         int findID = sc.nextInt();
         Document result = binarySearch(findID);
         if (result != null) {
             displayByType(result);
         } else System.out.println(NO_INFORMATION);
+    }
+
+    private void sortDocumentByID() {
+        for (int i = 1; i < documents.size(); i++) {
+            int position = i;
+            Document temp = documents.get(i);
+            while (position > 0) {
+                boolean isTempSmallerThanCurrentPosition = temp.getId() < documents.get(position-1).getId();
+                if (!isTempSmallerThanCurrentPosition) break;
+                documents.set(position, documents.get(position - 1));
+                position--;
+            }
+            documents.set(position, temp);
+        }
+        displayInfo();
     }
 
     private Document binarySearch(int findID) {
