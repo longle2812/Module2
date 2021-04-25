@@ -73,4 +73,14 @@ public class Student {
     public void setGradeC(GradeC gradeC) {
         this.gradeC = gradeC;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", priority=" + priority +
+                '}';
+    }
 }
