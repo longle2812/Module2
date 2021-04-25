@@ -46,13 +46,13 @@ public class GradeA extends Student{
     @Override
     public String toString() {
         return "GradeA{" +
-                "id=" + super.getId()+
-                ", name=" +super.getName()+
-                ", address=" +super.getAddress()+
-                ", priority=" +super.getPriority()+
-                ", math=" + math +
-                ", physic=" + physic +
-                ", chemistry=" + chemistry +
+                "id= " + super.getId()+
+                ", name= " +super.getName()+
+                ", address= " +super.getAddress()+
+                ", priority= " +super.getPriority()+
+                ", math= " + math +
+                ", physic= " + physic +
+                ", chemistry= " + chemistry +
                 '}';
     }
 }

@@ -46,13 +46,13 @@ public class GradeC extends Student{
     @Override
     public String toString() {
         return "GradeC{" +
-                "id=" + super.getId()+
-                ", name=" +super.getName()+
-                ", address=" +super.getAddress()+
-                ", priority=" +super.getPriority()+
-                "literature=" + literature +
-                ", history=" + history +
-                ", geography=" + geography +
+                "id= " + super.getId()+
+                ", name= " +super.getName()+
+                ", address= " +super.getAddress()+
+                ", priority= " +super.getPriority()+
+                ", literature= " + literature +
+                ", history= " + history +
+                ", geography= " + geography +
                 '}';
     }
 }
