@@ -1,6 +1,38 @@
 public class Request {
-    private Action action;
-    private Params params;
-    private Keyword keyword;
+    private String action;
+    private String params;
+    private String keyword;
 
+    public Request(String action, String params, String keyword) {
+        this.action = action;
+        this.params = params;
+        this.keyword = keyword;
+    }
+
+    public Request() {
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public String getParams() {
+        return params;
+    }
+
+    public void setParams(String params) {
+        this.params = params;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 }
