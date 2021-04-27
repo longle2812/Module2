@@ -29,7 +29,7 @@ public class Service {
 
     public void lookup(String keyword) {
         readFile();
-        writeToFile(keyword);
+
     }
 
     private void readFile() {
