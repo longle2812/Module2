@@ -206,7 +206,17 @@ public class StudentManagement {
     }
 
     //find student with highest mark
-    public void findHighestMark() {
+    public void findHighestMarkStudent() {
+        double highestMark = findHighestMark();
+        for (Student student :
+                studentList) {
+            if (student.getMark() == highestMark) {
+                System.out.println(student);
+            }
+        }
+    }
+
+    private double findHighestMark() {
         double highestMark = studentList.get(0).getMark();
         for (Student student : studentList
         ) {
@@ -214,12 +224,7 @@ public class StudentManagement {
                 highestMark = student.getMark();
             }
         }
-        for (Student student :
-                studentList) {
-            if (student.getMark() == highestMark) {
-                System.out.println(student);
-            }
-        }
+        return highestMark;
     }
 
     //import & export

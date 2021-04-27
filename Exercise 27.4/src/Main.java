@@ -59,7 +59,7 @@ public class Main {
                     studentManagement.writeFile();
                     break;
                 case 10:
-                    studentManagement.findHighestMark();
+                    studentManagement.findHighestMarkStudent();
                     break;
             }
         }
