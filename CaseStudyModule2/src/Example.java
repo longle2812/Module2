@@ -30,8 +30,10 @@ public class Example implements Serializable {
 
     @Override
     public String toString() {
-        return "- "+ this.definition+
-                "\n"+
-                "+ "+ this.sentences;
+        if (this.sentences != null) {
+            return "- " + this.definition +
+                    "\n" +
+                    "+ " + this.sentences;
+        } else return "- " + this.definition;
     }
 }

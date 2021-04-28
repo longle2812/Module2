@@ -9,6 +9,9 @@ public class Service {
     List<Example> verbList = new LinkedList<>();
     List<Example> synonymList = new LinkedList<>();
     List<Example> adjectiveList = new LinkedList<>();
+    String sentence;
+    String sentenceMeaning;
+    Example newExample;
 
     public Service() {
     }
@@ -56,138 +59,141 @@ public class Service {
             if (keyword.equals(entry.getKey())) {
                 isWordExist = true;
                 System.out.println("This word is exist");
-                Example newExample = new Example();
+                newExample = new Example();
                 switch (params) {
                     case "-p":
-                        addNewPronoun(newExample);
+                        addNewPronoun();
+                        pronounList = entry.getValue().getPronoun();
                         pronounList.add(newExample);
                         entry.getValue().setPronoun(pronounList);
                         break;
                     case "-n":
-                        addNewNoun(newExample);
+                        addNewNoun();
+                        nounList = entry.getValue().getNoun();
                         nounList.add(newExample);
                         entry.getValue().setNoun(nounList);
                         break;
                     case "-a":
-                        addNewAdjective(newExample);
+                        addNewAdjective();
+                        adjectiveList = entry.getValue().getVerb();
                         adjectiveList.add(newExample);
                         entry.getValue().setAdjective(adjectiveList);
                         break;
                     case "-v":
-                        addNewVerb(newExample);
+                        addNewVerb();
+                        verbList = entry.getValue().getVerb();
                         verbList.add(newExample);
                         entry.getValue().setVerb(verbList);
                         break;
                     case "-s":
-                        addNewSynonym(newExample);
+                        addNewSynonym();
+                        synonymList = entry.getValue().getSynonym();
                         synonymList.add(newExample);
                         entry.getValue().setSynonym(synonymList);
                         break;
                 }
+                System.out.println("Saved!");
                 break;
             }
         }
         if (!isWordExist) {
             System.out.println(keyword + " is not exist in database, created new one");
             Entities typeOfWord = new Entities();
-            Example newExample = new Example();
+            newExample = new Example();
             switch (params) {
                 case "-p":
-                    addNewPronoun(newExample);
+                    addNewPronoun();
+                    pronounList = new LinkedList<>();
                     pronounList.add(newExample);
                     typeOfWord.setPronoun(pronounList);
                     wordList.put(keyword, typeOfWord);
                     break;
                 case "-n":
-                    addNewNoun(newExample);
+                    addNewNoun();
+                    nounList = new LinkedList<>();
                     nounList.add(newExample);
                     typeOfWord.setNoun(nounList);
                     wordList.put(keyword, typeOfWord);
                     break;
                 case "-a":
-                    addNewAdjective(newExample);
+                    addNewAdjective();
+                    adjectiveList = new LinkedList<>();
                     adjectiveList.add(newExample);
                     typeOfWord.setAdjective(adjectiveList);
                     wordList.put(keyword, typeOfWord);
                     break;
                 case "-v":
-                    addNewVerb(newExample);
+                    addNewVerb();
+                    verbList = new LinkedList<>();
                     verbList.add(newExample);
                     typeOfWord.setVerb(verbList);
                     wordList.put(keyword, typeOfWord);
                     break;
                 case "-s":
-                    addNewSynonym(newExample);
+                    addNewSynonym();
+                    synonymList = new LinkedList<>();
                     synonymList.add(newExample);
                     typeOfWord.setSynonym(synonymList);
                     wordList.put(keyword, typeOfWord);
                     break;
             }
+            System.out.println("Saved!");
         }
     }
 
-    private void addNewSynonym(Example newExample) {
-        String sentence;
-        String sentenceMeaning;
+    private void addNewSynonym() {
         System.out.print("Synonymous definition:");
         String synDefinition = sc.nextLine();
-        System.out.print("Sentence: ");
-        sentence = sc.nextLine();
-        System.out.println("Sentence's meaning: ");
-        sentenceMeaning = sc.nextLine();
         newExample.setDefinition(synDefinition);
-        newExample.setSentences(sentence + "\n" + sentenceMeaning);
+        addSentences();
     }
 
-    private void addNewVerb(Example newExample) {
-        String sentence;
-        String sentenceMeaning;
+    private void addNewVerb() {
         System.out.print("Verb definition:");
         String verbDefinition = sc.nextLine();
-        System.out.print("Sentence: ");
-        sentence = sc.nextLine();
-        System.out.println("Sentence's meaning: ");
-        sentenceMeaning = sc.nextLine();
         newExample.setDefinition(verbDefinition);
-        newExample.setSentences(sentence + "\n" + sentenceMeaning);
+        addSentences();
     }
 
-    private void addNewAdjective(Example newExample) {
-        String sentence;
-        String sentenceMeaning;
+    private void addSentences() {
+        System.out.println("Add new sentences?");
+        System.out.println("1. Yes");
+        System.out.println("2. No");
+        int choice = sc.nextInt();
+        sc.nextLine();
+        switch (choice){
+            case 1:
+                System.out.print("Sentence: ");
+                sentence = sc.nextLine();
+                System.out.println("Sentence's meaning: ");
+                sentenceMeaning = sc.nextLine();
+                newExample.setSentences(sentence+"\n"+sentenceMeaning);
+                break;
+            case 2:
+                 newExample.setSentences(null);
+                break;
+        }
+    }
+
+    private void addNewAdjective() {
         System.out.print("Adjective definition:");
         String adjDefinition = sc.nextLine();
-        System.out.print("Sentence: ");
-        sentence = sc.nextLine();
-        System.out.println("Sentence's meaning: ");
-        sentenceMeaning = sc.nextLine();
         newExample.setDefinition(adjDefinition);
-        newExample.setSentences(sentence + "\n" + sentenceMeaning);
+        addSentences();
     }
 
-    private void addNewNoun(Example newExample) {
-        String sentence;
-        String sentenceMeaning;
+    private void addNewNoun() {
         System.out.print("Noun definition:");
-        String nounAdjective = sc.nextLine();
-        System.out.print("Sentence: ");
-        sentence = sc.nextLine();
-        System.out.println("Sentence's meaning: ");
-        sentenceMeaning = sc.nextLine();
-        newExample.setDefinition(nounAdjective);
-        newExample.setSentences(sentence + "\n" + sentenceMeaning);
+        String nounDefinition = sc.nextLine();
+        newExample.setDefinition(nounDefinition);
+        addSentences();
     }
 
-    private void addNewPronoun(Example newExample) {
-        String sentence;
+    private void addNewPronoun() {
         System.out.print("Pronoun definition:");
         String pronounDefinition = sc.nextLine();
-        System.out.print("Sentence: ");
-        sentence = sc.nextLine();
-        System.out.println("Sentence's meaning: ");
-        String sentenceMeaning = sc.nextLine();
         newExample.setDefinition(pronounDefinition);
-        newExample.setSentences(sentence + "\n" + sentenceMeaning + "\n");
+        addSentences();
     }
 
     public void display() {
