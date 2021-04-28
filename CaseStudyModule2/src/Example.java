@@ -1,4 +1,6 @@
-public class Example {
+import java.io.Serializable;
+
+public class Example implements Serializable {
     private String definition;
     private String sentences;
 
@@ -28,7 +30,8 @@ public class Example {
 
     @Override
     public String toString() {
-        return this.definition+ "\n"+
-                this.sentences;
+        return "- "+ this.definition+
+                "\n"+
+                "+ "+ this.sentences;
     }
 }

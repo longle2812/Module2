@@ -5,8 +5,8 @@ public class Controller {
         Scanner sc = new Scanner(System.in);
         Request request = new Request();
         Service service = new Service();
-        service.readFile();
         do {
+            service.readFile();
             System.out.println("Action:");
             request.setAction(sc.next());
             switch (request.getAction()) {
@@ -18,9 +18,18 @@ public class Controller {
                     request.setParams(sc.next());
                     request.setKeyword(sc.nextLine());
                     service.define(request.getParams(), request.getKeyword());
+                    service.writeToFile();
+                    break;
+                case "show":
+                    service.display();
+                    break;
+                case "drop":
+                    request.setKeyword(sc.nextLine());
+                    service.drop(request.getKeyword());
+                    service.writeToFile();
                     break;
             }
         }
-        while (request.getAction() != "q");
+        while (!request.getAction().equals("exit"));
     }
 }

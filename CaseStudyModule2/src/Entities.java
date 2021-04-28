@@ -62,6 +62,82 @@ public class Entities implements Serializable {
 
     @Override
     public String toString() {
-        return this.name + "\n" + this.pronoun;
+        String str = "";
+        if (!showPronoun().equals("")) {
+            str += "@ Phát âm" + "\n" + showPronoun();
+        }
+        if (!showNoun().equals("")) {
+            str += "@ Danh từ" + "\n" + showNoun();
+        }
+        if (!showAdjective().equals("")) {
+            str += "@ Tính từ" + "\n" + showAdjective();
+        }
+        if (!showVerb().equals("")) {
+            str += "@ Động từ" + "\n" + showVerb();
+        }
+        if (!showSynonym().equals("")) {
+            str += "@ Đồng âm" + "\n" + showSynonym();
+        }
+        return str;
+    }
+
+    public String showPronoun() {
+        String str = "";
+        if (this.pronoun != null) {
+            for (Example pronouns :
+                    pronoun) {
+                if (pronouns != null)
+                    str += pronouns + "\n";
+            }
+        }
+        return str;
+    }
+
+    public String showNoun() {
+        String str = "";
+        if (this.noun != null) {
+            for (Example nouns :
+                    noun) {
+                if (nouns != null)
+                    str += nouns + "\n";
+            }
+        }
+        return str;
+    }
+
+    public String showVerb() {
+        String str = "";
+        if (this.verb != null) {
+            for (Example verbs :
+                    verb) {
+                if (verbs != null)
+                    str += verbs + "\n";
+            }
+        }
+        return str;
+    }
+
+    public String showAdjective() {
+        String str = "";
+        if (this.adjective != null) {
+            for (Example adjectives :
+                    adjective) {
+                if (adjectives != null)
+                    str += adjectives + "\n";
+            }
+        }
+        return str;
+    }
+
+    public String showSynonym() {
+        String str = "";
+        if (this.synonym != null) {
+            for (Example synonyms :
+                    synonym) {
+                if (synonyms != null)
+                    str += synonyms + "\n";
+            }
+        }
+        return str;
     }
 }
