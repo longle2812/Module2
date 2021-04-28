@@ -161,16 +161,16 @@ public class Service {
         System.out.println("2. No");
         int choice = sc.nextInt();
         sc.nextLine();
-        switch (choice){
+        switch (choice) {
             case 1:
                 System.out.print("Sentence: ");
                 sentence = sc.nextLine();
                 System.out.println("Sentence's meaning: ");
                 sentenceMeaning = sc.nextLine();
-                newExample.setSentences(sentence+"\n"+sentenceMeaning);
+                newExample.setSentences(sentence + "\n" + sentenceMeaning);
                 break;
             case 2:
-                 newExample.setSentences(null);
+                newExample.setSentences(null);
                 break;
         }
     }
@@ -208,6 +208,7 @@ public class Service {
     public void drop(String keyword) {
         if (wordList.containsKey(keyword)) {
             wordList.remove(keyword);
+            System.out.println("@" + keyword + " dropped");
         }
     }
 }
