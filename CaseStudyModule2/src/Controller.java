@@ -5,12 +5,22 @@ public class Controller {
         Scanner sc = new Scanner(System.in);
         Request request = new Request();
         Service service = new Service();
-        System.out.println("Action:");
-        request.setAction(sc.next());
-        switch (request.getAction()){
-            case "lookup":
+        service.readFile();
+        do {
+            System.out.println("Action:");
+            request.setAction(sc.next());
+            switch (request.getAction()) {
+                case "lookup":
                     request.setKeyword(sc.nextLine());
                     service.lookup(request.getKeyword());
+                    break;
+                case "define":
+                    request.setParams(sc.next());
+                    request.setKeyword(sc.nextLine());
+                    service.define(request.getParams(), request.getKeyword());
+                    break;
+            }
         }
+        while (request.getAction() != "q");
     }
 }
