@@ -1,7 +1,8 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Controller {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         Request request = new Request();
         Service service = new Service();
@@ -27,6 +28,10 @@ public class Controller {
                     request.setKeyword(sc.nextLine());
                     service.drop(request.getKeyword());
                     service.writeToFile();
+                    break;
+                case "crawl":
+                    request.setKeyword(sc.nextLine());
+                    Crawl crawl = new Crawl(request.getKeyword());
                     break;
             }
         }
