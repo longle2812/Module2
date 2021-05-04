@@ -32,12 +32,12 @@ public class VehicleManagement {
 
 
     public void addNewVehicle() {
-        System.out.println(CAR);
-        System.out.println(MOTORBIKE);
-        System.out.println(TRUCK);
-        int choice = sc.nextInt();
-        sc.nextLine();
+        int choice = getChoice();
         addBasicInfo();
+        addDetailInfo(choice);
+    }
+
+    private void addDetailInfo(int choice) {
         switch (choice) {
             case 1:
                 addNewCar();
@@ -49,6 +49,15 @@ public class VehicleManagement {
                 addNewTruck();
                 break;
         }
+    }
+
+    private int getChoice() {
+        System.out.println(CAR);
+        System.out.println(MOTORBIKE);
+        System.out.println(TRUCK);
+        int choice = sc.nextInt();
+        sc.nextLine();
+        return choice;
     }
 
     private void addNewTruck() {
