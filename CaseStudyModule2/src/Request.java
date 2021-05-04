@@ -3,12 +3,6 @@ public class Request {
     private String params;
     private String keyword;
 
-    public Request(String action, String params, String keyword) {
-        this.action = action;
-        this.params = params;
-        this.keyword = keyword;
-    }
-
     public Request() {
     }
 

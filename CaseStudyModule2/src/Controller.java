@@ -29,9 +29,9 @@ public class Controller {
                     service.drop(request.getKeyword());
                     service.writeToFile();
                     break;
-                case "crawl":
+                case "online":
                     request.setKeyword(sc.nextLine());
-                    Crawl crawl = new Crawl(request.getKeyword());
+                    new Crawl(request.getKeyword());
                     break;
             }
         }
