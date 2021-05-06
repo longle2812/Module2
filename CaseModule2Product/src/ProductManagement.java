@@ -91,4 +91,17 @@ public class ProductManagement {
         Table table = furnitureAbstractFactory.createTable(id, color, price, weight, brand);
         tables.add(table);
     }
+
+    public void showAllProduct() {
+        System.out.println("List of Table");
+        for (Table table :
+                tables) {
+            System.out.println(table);
+        }
+        System.out.println("List of Chair");
+        for (Chair chair :
+                chairs) {
+            System.out.println(chair);
+        }
+    }
 }

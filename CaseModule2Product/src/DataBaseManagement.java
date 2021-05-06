@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class DataBase {
+public class DataBaseManagement {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ProductManagement productManagement = new ProductManagement();
@@ -15,6 +15,8 @@ public class DataBase {
                 case 1:
                     productManagement.addNewProduct();
                     break;
+                case 2:
+                    productManagement.showAllProduct();
             }
         }
         while (choice != 0);
