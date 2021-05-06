@@ -1,7 +1,7 @@
 public class WoodenFactory extends FurnitureAbstractFactory {
 
     @Override
-    public Chair createChair() {
+    public Chair createChair(String id, String color, double price, double weight, String brand) {
         return new WoodenChair();
     }
 

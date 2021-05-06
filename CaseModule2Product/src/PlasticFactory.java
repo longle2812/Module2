@@ -1,8 +1,8 @@
 public class PlasticFactory extends FurnitureAbstractFactory {
 
     @Override
-    public PlasticChair createChair() {
-        return new PlasticChair();
+    public PlasticChair createChair(String id, String color, double price, double weight, String type) {
+        return new PlasticChair(id, color, price, weight, type);
     }
 
     @Override

@@ -7,7 +7,4 @@ public class PlasticChair extends Chair{
     public PlasticChair() {
     }
 
-    public void say(){
-        System.out.println("hi");
-    }
 }

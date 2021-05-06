@@ -5,7 +5,6 @@ public class DataBase {
         Scanner sc = new Scanner(System.in);
         ProductManagement productManagement = new ProductManagement();
         FurnitureAbstractFactory furnitureAbstractFactory = FurnitureFactory.getFactory(MaterialType.PLASTIC);
-        Chair plasticChair = furnitureAbstractFactory.createChair();
         int choice;
         do {
             System.out.println("Welcome to Manager Software");

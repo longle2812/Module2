@@ -9,4 +9,14 @@ public class Chair extends Product{
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        return "Chair{" +
+                "id='" + super.getId() + '\'' +
+                ", color='" + super.getColor() + '\'' +
+                ", price=" + super.getPrice() +
+                ", weight=" + super.getWeight() +
+                "type='" + type + '\'' +
+                '}';
+    }
 }
