@@ -49,6 +49,6 @@ public class AccountManagement {
                 accounts.put(username, password);
                 System.out.println("Add successful");
             }
-            else System.out.println("Account existed");
+            else System.err.println("Account existed");
     }
 }

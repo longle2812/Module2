@@ -1,22 +1,49 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DataBaseManagement {
+    public static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        loginPanel();
-        productManagement();
+        List<Table> tables = new ArrayList<>();
+        List<Chair> chairs = new ArrayList<>();
+        while (true) {
+            int choice;
+            loginPanel();
+            do {
+                mainMenu();
+            }
+            while (true);
+        }
+    }
+
+    private static void mainMenu() throws IOException, ClassNotFoundException {
+        int choice;
+        System.out.println("1. Product Management");
+        System.out.println("2. Employee Management");
+        System.out.println("3. Exit");
+        choice = sc.nextInt();
+        switch (choice) {
+            case 1:
+                productManagement();
+                break;
+            case 2:
+                break;
+        }
+    }
+
+    private static void displayMainMenu() {
+        System.out.println("1. Product Management");
+        System.out.println("2. Employee Management");
     }
 
     private static void loginPanel() {
-        Scanner sc = new Scanner(System.in);
         AccountManagement accountManagement = new AccountManagement();
         int choice;
         boolean isLoginSuccess = false;
         do {
-            System.out.println("Account Pannel");
-            System.out.println("1. Create new account");
-            System.out.println("2. Login");
-            System.out.println("0. Exit");
+            displayLoginMenu();
             choice = sc.nextInt();
             switch (choice) {
                 case 1:
@@ -26,9 +53,7 @@ public class DataBaseManagement {
                     isLoginSuccess = accountManagement.login();
                     if (isLoginSuccess) {
                         System.out.println("Login successful");
-
-                    }
-                    else System.out.println("Username or password is wrong");
+                    } else System.err.println("Username or password is wrong");
                     break;
                 case 0:
                     System.out.println("Goodbye!");
@@ -39,9 +64,14 @@ public class DataBaseManagement {
         while (!isLoginSuccess);
     }
 
+    private static void displayLoginMenu() {
+        System.out.println("Account Pannel");
+        System.out.println("1. Create new account");
+        System.out.println("2. Login");
+        System.out.println("0. Exit");
+    }
 
     private static void productManagement() throws IOException, ClassNotFoundException {
-        Scanner sc = new Scanner(System.in);
         ProductManagement productManagement = new ProductManagement();
         int choice;
         do {
@@ -77,6 +107,9 @@ public class DataBaseManagement {
                     break;
                 case 7:
                     productManagement.readFromFile();
+                    break;
+                case 8:
+                    mainMenu();
                     break;
             }
         }
