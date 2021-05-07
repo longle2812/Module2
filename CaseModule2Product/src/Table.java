@@ -23,7 +23,7 @@ public class Table extends Product{
                 ", color='" + super.getColor() + '\'' +
                 ", price=" + super.getPrice() +
                 ", weight=" + super.getWeight() +
-                "brand='" + brand + '\'' +
+                ", brand='" + brand + '\'' +
                 '}';
     }
 }
