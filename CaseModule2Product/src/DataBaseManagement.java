@@ -3,9 +3,19 @@ import java.util.Scanner;
 
 public class DataBaseManagement {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+        AccountManagement accountManagement = new AccountManagement();
+        do{
+            System.out.println("Login Information");
+            System.out.println("Enter username");
+            System.out.println("Enter password");
+        }
+        productManagement();
+
+    }
+
+    private static void productManagement() throws IOException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
         ProductManagement productManagement = new ProductManagement();
-        FurnitureAbstractFactory furnitureAbstractFactory = FurnitureFactory.getFactory(MaterialType.PLASTIC);
         int choice;
         do {
             System.out.println("Welcome to Manager Software");
