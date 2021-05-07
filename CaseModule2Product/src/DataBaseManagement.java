@@ -3,15 +3,42 @@ import java.util.Scanner;
 
 public class DataBaseManagement {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        AccountManagement accountManagement = new AccountManagement();
-        do{
-            System.out.println("Login Information");
-            System.out.println("Enter username");
-            System.out.println("Enter password");
-        }
+        loginPanel();
         productManagement();
-
     }
+
+    private static void loginPanel() {
+        Scanner sc = new Scanner(System.in);
+        AccountManagement accountManagement = new AccountManagement();
+        int choice;
+        boolean isLoginSuccess = false;
+        do {
+            System.out.println("Account Pannel");
+            System.out.println("1. Create new account");
+            System.out.println("2. Login");
+            System.out.println("0. Exit");
+            choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    accountManagement.createNewAccount();
+                    continue;
+                case 2:
+                    isLoginSuccess = accountManagement.login();
+                    if (isLoginSuccess) {
+                        System.out.println("Login successful");
+
+                    }
+                    else System.out.println("Username or password is wrong");
+                    break;
+                case 0:
+                    System.out.println("Goodbye!");
+                    System.exit(0);
+                    break;
+            }
+        }
+        while (!isLoginSuccess);
+    }
+
 
     private static void productManagement() throws IOException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
@@ -26,9 +53,10 @@ public class DataBaseManagement {
             System.out.println("5. Sort product by price");
             System.out.println("6. Export data to file");
             System.out.println("7. Import data from file");
+            System.out.println("8. Back");
             choice = sc.nextInt();
             sc.nextLine();
-            switch (choice){
+            switch (choice) {
                 case 1:
                     productManagement.addNewProduct();
                     break;

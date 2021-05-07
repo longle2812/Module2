@@ -3,31 +3,52 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class AccountManagement {
-    public final AccountManagement INSTANCE = new AccountManagement();
     static Map<String, String> accounts = new HashMap<>();
+    Scanner sc = new Scanner(System.in);
+    private String username;
+    private String password;
 
     public AccountManagement() {
     }
 
-    public AccountManagement getInstance() {
-        return INSTANCE;
-    }
 
-    public boolean checkAccount() {
+    public boolean login() {
         boolean isValid = false;
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Username");
-        String user = sc.nextLine();
-        System.out.println("Enter Password");
-        String password = sc.nextLine();
-        for (Map.Entry<String, String> username : accounts.entrySet()
+        System.out.println("Enter username");
+        username = sc.nextLine();
+        System.out.println("Enter password");
+        password = sc.nextLine();
+        for (Map.Entry<String, String> user : accounts.entrySet()
         ) {
-            if (user.equals(username.getKey())) {
-                if (password.equals(username.getValue())) {
+            if (username.equals(user.getKey())) {
+                if(password.equals(user.getValue())) {
                     isValid = true;
                 }
             }
         }
         return isValid;
+    }
+
+    public boolean checkNewAccount() {
+        boolean isValid = true;
+        for (Map.Entry<String, String> user : accounts.entrySet()
+        ) {
+            if (username.equals(user.getKey())) {
+                    isValid = false;
+            }
+        }
+        return isValid;
+    }
+
+    public void createNewAccount() {
+            System.out.println("Enter username");
+            username = sc.nextLine();
+            System.out.println("Enter password");
+            password = sc.nextLine();
+            if (checkNewAccount()) {
+                accounts.put(username, password);
+                System.out.println("Add successful");
+            }
+            else System.out.println("Account existed");
     }
 }
