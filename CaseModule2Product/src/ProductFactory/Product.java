@@ -1,3 +1,5 @@
+package ProductFactory;
+
 import java.io.Serializable;
 
 public class Product implements Serializable {
@@ -50,7 +52,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "ProductFactory.Product{" +
                 "id='" + id + '\'' +
                 ", color='" + color + '\'' +
                 ", price=" + price +

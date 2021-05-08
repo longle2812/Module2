@@ -1,4 +1,7 @@
-public class Chair extends Product{
+package ProductFactory;
+
+
+public class Chair extends Product {
     private String type; //living room, kitchen, work
 
     public Chair() {
@@ -19,7 +22,7 @@ public class Chair extends Product{
 
     @Override
     public String toString() {
-        return "Chair{" +
+        return "ProductFactory.Chair{" +
                 "id='" + super.getId() + '\'' +
                 ", color='" + super.getColor() + '\'' +
                 ", price=" + super.getPrice() +

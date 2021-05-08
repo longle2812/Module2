@@ -1,4 +1,7 @@
-public class Table extends Product{
+package ProductFactory;
+
+
+public class Table extends Product {
     private String brand;
     public Table() {
     }
@@ -18,7 +21,7 @@ public class Table extends Product{
 
     @Override
     public String toString() {
-        return "Table{" +
+        return "ProductFactory.Table{" +
                 "id='" + super.getId() + '\'' +
                 ", color='" + super.getColor() + '\'' +
                 ", price=" + super.getPrice() +

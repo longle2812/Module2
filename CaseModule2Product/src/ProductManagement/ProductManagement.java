@@ -1,3 +1,7 @@
+package ProductManagement;
+
+import ProductFactory.*;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +24,8 @@ public class ProductManagement {
 
     public void addNewProduct() {
         System.out.println("Choose type:");
-        System.out.println("1. Table");
-        System.out.println("2. Chair");
+        System.out.println("1. ProductFactory.Table");
+        System.out.println("2. ProductFactory.Chair");
         int choice = sc.nextInt();
         sc.nextLine();
         System.out.println("Choose material");
@@ -34,11 +38,11 @@ public class ProductManagement {
                 FurnitureAbstractFactory plasticFactory = FurnitureFactory.getFactory(MaterialType.PLASTIC);
                 switch (choice){
                     case 1:
-                        System.out.println("Add new Plastic Table");
+                        System.out.println("Add new Plastic ProductFactory.Table");
                         createNewTable(plasticFactory);
                         break;
                     case 2:
-                        System.out.println("Add new Plastic Chair");
+                        System.out.println("Add new Plastic ProductFactory.Chair");
                         createNewChair(plasticFactory);
                         break;
                 }
@@ -47,11 +51,11 @@ public class ProductManagement {
                 FurnitureAbstractFactory woodenFactory = FurnitureFactory.getFactory(MaterialType.WOOD);
                 switch (choice){
                     case 1:
-                        System.out.println("Add new Wooden Table");
+                        System.out.println("Add new Wooden ProductFactory.Table");
                         createNewTable(woodenFactory);
                         break;
                     case 2:
-                        System.out.println("Add new Wooden Chair");
+                        System.out.println("Add new Wooden ProductFactory.Chair");
                         createNewChair(woodenFactory);
                         break;
                 }
@@ -88,12 +92,12 @@ public class ProductManagement {
     }
 
     public void showAllProduct() {
-        System.out.println("List of Table");
+        System.out.println("List of ProductFactory.Table");
         for (Table table :
                 tables) {
             System.out.println(table);
         }
-        System.out.println("List of Chair");
+        System.out.println("List of ProductFactory.Chair");
         for (Chair chair :
                 chairs) {
             System.out.println(chair);
@@ -101,8 +105,8 @@ public class ProductManagement {
     }
 
     public void searchProductByID() {
-        System.out.println("1. Table");
-        System.out.println("2. Chair");
+        System.out.println("1. ProductFactory.Table");
+        System.out.println("2. ProductFactory.Chair");
         int choice = sc.nextInt();
         sc.nextLine();
         System.out.println("Enter ID");
@@ -134,8 +138,8 @@ public class ProductManagement {
     }
 
     public void editInformationByID() {
-        System.out.println("1. Table");
-        System.out.println("2. Chair");
+        System.out.println("1. ProductFactory.Table");
+        System.out.println("2. ProductFactory.Chair");
         int choice = sc.nextInt();
         sc.nextLine();
         System.out.println("Enter ID");
@@ -144,7 +148,7 @@ public class ProductManagement {
             case 1:
                 Table table = (Table) genericSearch(tables, findIndex);
                 if (table != null){
-                    System.out.println("Product is found");
+                    System.out.println("ProductFactory.Product is found");
                     createNewProduct();
                     table.setId(id);
                     table.setColor(color);
@@ -172,8 +176,8 @@ public class ProductManagement {
     }
 
     public void sortByPrice() {
-        System.out.println("1. Table");
-        System.out.println("2. Chair");
+        System.out.println("1. ProductFactory.Table");
+        System.out.println("2. ProductFactory.Chair");
         int choice = sc.nextInt();
         sc.nextLine();
         switch (choice){

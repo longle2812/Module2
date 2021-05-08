@@ -1,3 +1,5 @@
+package ProductFactory;
+
 public class PlasticTable extends Table {
     public PlasticTable() {
     }

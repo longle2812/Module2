@@ -1,3 +1,5 @@
+package ProductFactory;
+
 public abstract class FurnitureFactory {
     public FurnitureFactory() {
     }

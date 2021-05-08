@@ -1,3 +1,8 @@
+package ProductFactory;
+
+import ProductFactory.FurnitureAbstractFactory;
+import ProductFactory.PlasticChair;
+
 public class PlasticFactory extends FurnitureAbstractFactory {
 
     @Override

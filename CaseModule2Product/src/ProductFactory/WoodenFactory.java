@@ -1,3 +1,6 @@
+package ProductFactory;
+
+
 public class WoodenFactory extends FurnitureAbstractFactory {
 
     @Override

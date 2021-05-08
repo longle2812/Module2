@@ -1,3 +1,5 @@
+package ProductFactory;
+
 public class WoodenTable extends Table {
     public WoodenTable() {
     }

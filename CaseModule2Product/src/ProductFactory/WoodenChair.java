@@ -1,3 +1,5 @@
+package ProductFactory;
+
 public class WoodenChair extends Chair {
     public WoodenChair() {
     }
