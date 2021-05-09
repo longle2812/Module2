@@ -17,7 +17,7 @@ public class DataBaseManagement {
     private static void mainMenu() throws IOException, ClassNotFoundException, InterruptedException {
         int choice;
         System.out.println("1. Product Management");
-        System.out.println("2. EmployeeManagement.Employee Management");
+        System.out.println("2. Employee Management");
         System.out.println("3. Logout");
         choice = sc.nextInt();
         switch (choice) {
@@ -83,7 +83,7 @@ public class DataBaseManagement {
         while (choice != 9);
     }
 
-    private static void loginPanel() {
+    private static void loginPanel() throws IOException, ClassNotFoundException {
         AccountManagement accountManagement = new AccountManagement();
         int choice;
         boolean isLoginSuccess = false;
@@ -110,7 +110,7 @@ public class DataBaseManagement {
     }
 
     private static void displayLoginMenu() {
-        System.out.println("Account Pannel");
+        System.out.println("Account Panel");
         System.out.println("1. Create new account");
         System.out.println("2. Login");
         System.out.println("0. Exit");
