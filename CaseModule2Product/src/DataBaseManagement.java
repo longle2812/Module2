@@ -1,4 +1,5 @@
 import Account.AccountManagement;
+import EmployeeManagement.EmployeeManagement;
 import ProductManagement.ProductManagement;
 
 import java.io.IOException;
@@ -6,21 +7,17 @@ import java.util.Scanner;
 
 public class DataBaseManagement {
     public static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-        while (true) {
-            loginPanel();
-            Thread.sleep(1000);
-            do {
-                mainMenu();
-            }
-            while (true);
-        }
+        loginPanel();
+        Thread.sleep(1000);
+        mainMenu();
     }
 
     private static void mainMenu() throws IOException, ClassNotFoundException, InterruptedException {
         int choice;
         System.out.println("1. Product Management");
-        System.out.println("2. Employee Management");
+        System.out.println("2. EmployeeManagement.Employee Management");
         System.out.println("3. Logout");
         choice = sc.nextInt();
         switch (choice) {
@@ -28,7 +25,7 @@ public class DataBaseManagement {
                 productManagement();
                 break;
             case 2:
-
+                employeeManagement();
                 break;
             case 3:
                 System.out.println("Logout Successful");
@@ -37,6 +34,54 @@ public class DataBaseManagement {
         }
     }
 
+    private static void employeeManagement() throws IOException, ClassNotFoundException, InterruptedException {
+        EmployeeManagement employeeManagement = new EmployeeManagement();
+        int choice;
+        do {
+            System.out.println("Welcome to EmployeeManagement.Employee Software");
+            System.out.println("1. Add new EmployeeManagement.Employee");
+            System.out.println("2. Show all EmployeeManagement.Employee");
+            System.out.println("3. Search employee by ID");
+            System.out.println("4. Edit information by ID");
+            System.out.println("5. Delete employee by ID");
+            System.out.println("6. Sort employee by wage");
+            System.out.println("7. Export data to file");
+            System.out.println("8. Import data from file");
+            System.out.println("9. Back");
+            choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice){
+                case 1:
+                    employeeManagement.addNewEmployee();
+                    break;
+                case 2:
+                    employeeManagement.showEmployeeList();
+                    break;
+                case 3:
+                    employeeManagement.searchByID();
+                    break;
+                case 4:
+                    employeeManagement.editInformation();
+                    break;
+                case 5:
+                    employeeManagement.deleteEmployee();
+                    break;
+                case 6:
+                    employeeManagement.sortByWage();
+                    break;
+                case 7:
+                    employeeManagement.writeToFile();
+                    break;
+                case 8:
+                    employeeManagement.readFromFile();
+                    break;
+                case 9:
+                    mainMenu();
+                    break;
+            }
+        }
+        while (choice != 9);
+    }
 
     private static void loginPanel() {
         AccountManagement accountManagement = new AccountManagement();
@@ -76,14 +121,15 @@ public class DataBaseManagement {
         int choice;
         do {
             System.out.println("Welcome to Manager Software");
-            System.out.println("1. Add new ProductFactory.Product");
-            System.out.println("2. Show all ProductFactory.Product");
+            System.out.println("1. Add new Product");
+            System.out.println("2. Show all Product");
             System.out.println("3. Search product by ID");
             System.out.println("4. Edit information by ID");
-            System.out.println("5. Sort product by price");
-            System.out.println("6. Export data to file");
-            System.out.println("7. Import data from file");
-            System.out.println("8. Back");
+            System.out.println("5. Delete product by ID");
+            System.out.println("6. Sort product by price");
+            System.out.println("7. Export data to file");
+            System.out.println("8. Import data from file");
+            System.out.println("9. Back");
             choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -100,15 +146,18 @@ public class DataBaseManagement {
                     productManagement.editInformationByID();
                     break;
                 case 5:
-                    productManagement.sortByPrice();
+                    productManagement.deleteProdcutByID();
                     break;
                 case 6:
-                    productManagement.writeToFile();
+                    productManagement.sortByPrice();
                     break;
                 case 7:
-                    productManagement.readFromFile();
+                    productManagement.writeToFile();
                     break;
                 case 8:
+                    productManagement.readFromFile();
+                    break;
+                case 9:
                     mainMenu();
                     break;
             }

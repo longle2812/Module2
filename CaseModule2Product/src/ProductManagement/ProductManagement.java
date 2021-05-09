@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class ProductManagement {
     Scanner sc = new Scanner(System.in);
-    List<Table> tables = new ArrayList<>();
-    List<Chair> chairs = new ArrayList<>();
+    List<Table> tableList = new ArrayList<>();
+    List<Chair> chairList = new ArrayList<>();
     private String id;
     private String color;
     private double price;
@@ -24,8 +24,8 @@ public class ProductManagement {
 
     public void addNewProduct() {
         System.out.println("Choose type:");
-        System.out.println("1. ProductFactory.Table");
-        System.out.println("2. ProductFactory.Chair");
+        System.out.println("1. Table");
+        System.out.println("2. Chair");
         int choice = sc.nextInt();
         sc.nextLine();
         System.out.println("Choose material");
@@ -33,29 +33,29 @@ public class ProductManagement {
         System.out.println("2. Wooden");
         int material = sc.nextInt();
         sc.nextLine();
-        switch (material){
+        switch (material) {
             case 1:
                 FurnitureAbstractFactory plasticFactory = FurnitureFactory.getFactory(MaterialType.PLASTIC);
-                switch (choice){
+                switch (choice) {
                     case 1:
-                        System.out.println("Add new Plastic ProductFactory.Table");
+                        System.out.println("Add new Plastic Table");
                         createNewTable(plasticFactory);
                         break;
                     case 2:
-                        System.out.println("Add new Plastic ProductFactory.Chair");
+                        System.out.println("Add new Plastic Chair");
                         createNewChair(plasticFactory);
                         break;
                 }
                 break;
             case 2:
                 FurnitureAbstractFactory woodenFactory = FurnitureFactory.getFactory(MaterialType.WOOD);
-                switch (choice){
+                switch (choice) {
                     case 1:
-                        System.out.println("Add new Wooden ProductFactory.Table");
+                        System.out.println("Add new Wooden Table");
                         createNewTable(woodenFactory);
                         break;
                     case 2:
-                        System.out.println("Add new Wooden ProductFactory.Chair");
+                        System.out.println("Add new Wooden Chair");
                         createNewChair(woodenFactory);
                         break;
                 }
@@ -68,7 +68,7 @@ public class ProductManagement {
         System.out.println("Enter type");
         type = sc.nextLine();
         Chair chair = furnitureAbstractFactory.createChair(id, color, price, weight, type);
-        chairs.add(chair);
+        chairList.add(chair);
     }
 
     private void createNewProduct() {
@@ -88,49 +88,51 @@ public class ProductManagement {
         System.out.println("Enter brand");
         brand = sc.nextLine();
         Table table = furnitureAbstractFactory.createTable(id, color, price, weight, brand);
-        tables.add(table);
+        tableList.add(table);
     }
 
     public void showAllProduct() {
-        System.out.println("List of ProductFactory.Table");
+        System.out.println("List of Table");
         for (Table table :
-                tables) {
+                tableList) {
             System.out.println(table);
         }
-        System.out.println("List of ProductFactory.Chair");
+        System.out.println("List of Chair");
         for (Chair chair :
-                chairs) {
+                chairList) {
             System.out.println(chair);
         }
     }
 
-    public void searchProductByID() {
-        System.out.println("1. ProductFactory.Table");
-        System.out.println("2. ProductFactory.Chair");
+    public Product searchProductByID() {
+        System.out.println("1. Table");
+        System.out.println("2. Chair");
         int choice = sc.nextInt();
         sc.nextLine();
         System.out.println("Enter ID");
         String findIndex = sc.nextLine();
-        switch (choice){
+        Product product = null;
+        switch (choice) {
             case 1:
-                if (genericSearch(tables, findIndex) != null){
-                    System.out.println(genericSearch(tables, findIndex));
-                }
-                else System.out.println("No information");
-                break;
+                product = genericSearch(tableList, findIndex);
+                if (product != null) {
+                    System.out.println(genericSearch(tableList, findIndex));
+                } else System.out.println("No information");
+            break;
             case 2:
-                if (genericSearch(chairs, findIndex) != null){
-                    System.out.println(genericSearch(chairs, findIndex));
-                }
-                else System.out.println("No information");
+                product = genericSearch(chairList, findIndex);
+                if (product != null) {
+                    System.out.println(genericSearch(chairList, findIndex));
+                } else System.out.println("No information");
                 break;
         }
+        return product;
     }
 
-    private <E,T> Product genericSearch(List<T> productList, String findIndex) {
+    private <E, T> Product genericSearch(List<T> productList, String findIndex) {
         for (T product :
                 productList) {
-            if (((Product) product).getId().equals(findIndex) ) {
+            if (((Product) product).getId().equals(findIndex)) {
                 return (Product) product;
             }
         }
@@ -138,17 +140,17 @@ public class ProductManagement {
     }
 
     public void editInformationByID() {
-        System.out.println("1. ProductFactory.Table");
-        System.out.println("2. ProductFactory.Chair");
+        System.out.println("1. Table");
+        System.out.println("2. Chair");
         int choice = sc.nextInt();
         sc.nextLine();
         System.out.println("Enter ID");
         String findIndex = sc.nextLine();
-        switch (choice){
+        switch (choice) {
             case 1:
-                Table table = (Table) genericSearch(tables, findIndex);
-                if (table != null){
-                    System.out.println("ProductFactory.Product is found");
+                Table table = (Table) genericSearch(tableList, findIndex);
+                if (table != null) {
+                    System.out.println("Product is found");
                     createNewProduct();
                     table.setId(id);
                     table.setColor(color);
@@ -160,8 +162,8 @@ public class ProductManagement {
                 }
                 break;
             case 2:
-                Chair chair = (Chair) genericSearch(chairs, findIndex);
-                if (chair != null){
+                Chair chair = (Chair) genericSearch(chairList, findIndex);
+                if (chair != null) {
                     createNewProduct();
                     chair.setId(id);
                     chair.setColor(color);
@@ -176,35 +178,40 @@ public class ProductManagement {
     }
 
     public void sortByPrice() {
-        System.out.println("1. ProductFactory.Table");
-        System.out.println("2. ProductFactory.Chair");
+        System.out.println("1. Table");
+        System.out.println("2. Chair");
         int choice = sc.nextInt();
         sc.nextLine();
-        switch (choice){
+        switch (choice) {
             case 1:
-                for (int i = 0; i < tables.size()-1; i++) {
-                    for (int j = i+1; j < tables.size(); j++) {
-                        if (tables.get(i).getPrice() < tables.get(j).getPrice()){
-                            Table temp = tables.get(i);
-                            tables.set(i, tables.get(j));
-                            tables.set(j, temp);
-                        }
-                    }
-                }
+                genericSort(tableList);
                 break;
             case 2:
+                genericSort(chairList);
                 break;
         }
         showAllProduct();
     }
 
+    private <T> void genericSort(List<T> list) {
+        for (int i = 0; i < list.size() - 1; i++) {
+            for (int j = i + 1; j < list.size(); j++) {
+                if (((List<Product>)list).get(i).getPrice() < ((List<Product>)list).get(j).getPrice()) {
+                    Product temp = (Product) list.get(i);
+                    list.set(i, list.get(j));
+                    list.set(j, (T) temp);
+                }
+            }
+        }
+    }
+
     public void writeToFile() throws IOException {
         FileOutputStream fileTable = new FileOutputStream("tableList.txt");
         ObjectOutputStream objectTable = new ObjectOutputStream(fileTable);
-        objectTable.writeObject(tables);
+        objectTable.writeObject(tableList);
         FileOutputStream fileChair = new FileOutputStream("chairList.txt");
         ObjectOutputStream objectChair = new ObjectOutputStream(fileChair);
-        objectChair.writeObject(chairs);
+        objectChair.writeObject(chairList);
         objectChair.close();
         objectTable.close();
     }
@@ -212,11 +219,25 @@ public class ProductManagement {
     public void readFromFile() throws IOException, ClassNotFoundException {
         FileInputStream fileTable = new FileInputStream("tableList.txt");
         ObjectInputStream objectTable = new ObjectInputStream(fileTable);
-        tables = (List<Table>) objectTable.readObject();
+        tableList = (List<Table>) objectTable.readObject();
         FileInputStream fileChair = new FileInputStream("chairList.txt");
         ObjectInputStream objectChair = new ObjectInputStream(fileChair);
-        chairs = (List<Chair>) objectChair.readObject();
+        chairList = (List<Chair>) objectChair.readObject();
         objectTable.close();
         objectChair.close();
+    }
+
+    public void deleteProdcutByID() {
+        Product product = searchProductByID();
+        if (product != null){
+            if (product instanceof Table){
+                tableList.remove(product);
+            }
+            if (product instanceof Chair){
+                tableList.remove(product);
+            }
+            System.out.println("Delete product successful");
+        }
+        else System.out.println("No information");
     }
 }
