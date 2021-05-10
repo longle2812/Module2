@@ -24,7 +24,7 @@ public class EmployeeManagement {
 
     public void addNewEmployee() {
         System.out.println("Choose type:");
-        System.out.println("1. EmployeeManagement.Leader");
+        System.out.println("1. Leader");
         System.out.println("2. Worker");
         int choice;
         choice = sc.nextInt();
@@ -78,7 +78,7 @@ public class EmployeeManagement {
                 workerList) {
             System.out.println(employee);
         }
-        System.out.println("List of EmployeeManagement.Leader");
+        System.out.println("List of Leader");
         for (Employee employee :
                 leaderList) {
             System.out.println(employee);
@@ -86,7 +86,7 @@ public class EmployeeManagement {
     }
 
     public Employee searchByID() {
-        System.out.println("1. EmployeeManagement.Leader");
+        System.out.println("1. Leader");
         System.out.println("2. Worker");
         System.out.println("Enter choice");
         int choice = sc.nextInt();
@@ -122,7 +122,7 @@ public class EmployeeManagement {
     }
 
     public void editInformation() {
-        System.out.println("1. EmployeeManagement.Leader");
+        System.out.println("1. Leader");
         System.out.println("2. Worker");
         System.out.println("Enter choice");
         int choice = sc.nextInt();
@@ -197,7 +197,7 @@ public class EmployeeManagement {
     }
 
     public void sortByWage() {
-        System.out.println("1. EmployeeManagement.Leader");
+        System.out.println("1. Leader");
         System.out.println("2. Worker");
         int choice = sc.nextInt();
         sc.nextLine();

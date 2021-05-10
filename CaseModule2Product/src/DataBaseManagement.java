@@ -9,16 +9,19 @@ public class DataBaseManagement {
     public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-        loginPanel();
-        Thread.sleep(1000);
+//        loginPanel();
         mainMenu();
     }
 
     private static void mainMenu() throws IOException, ClassNotFoundException, InterruptedException {
         int choice;
-        System.out.println("1. Product Management");
-        System.out.println("2. Employee Management");
+        System.out.println("**************************");
+        System.out.println("Welcome to Management Program");
+        System.out.println("1. Product Management Panel");
+        System.out.println("2. Employee Management Panel");
         System.out.println("3. Logout");
+        System.out.println("**************************");
+        System.out.println("Enter your choice: ");
         choice = sc.nextInt();
         switch (choice) {
             case 1:
@@ -29,7 +32,8 @@ public class DataBaseManagement {
                 break;
             case 3:
                 System.out.println("Logout Successful");
-                Thread.sleep(1000);
+                System.out.println("**************************");
+                Thread.sleep(500);
                 main(new String[]{});
         }
     }
@@ -38,9 +42,10 @@ public class DataBaseManagement {
         EmployeeManagement employeeManagement = new EmployeeManagement();
         int choice;
         do {
-            System.out.println("Welcome to EmployeeManagement.Employee Software");
-            System.out.println("1. Add new EmployeeManagement.Employee");
-            System.out.println("2. Show all EmployeeManagement.Employee");
+            System.out.println("**************************");
+            System.out.println("Welcome to Employee Software");
+            System.out.println("1. Add new Employee");
+            System.out.println("2. Show all Employee");
             System.out.println("3. Search employee by ID");
             System.out.println("4. Edit information by ID");
             System.out.println("5. Delete employee by ID");
@@ -48,9 +53,11 @@ public class DataBaseManagement {
             System.out.println("7. Export data to file");
             System.out.println("8. Import data from file");
             System.out.println("9. Back");
+            System.out.println("**************************");
+            System.out.println("Enter your choice:");
             choice = sc.nextInt();
             sc.nextLine();
-            switch (choice){
+            switch (choice) {
                 case 1:
                     employeeManagement.addNewEmployee();
                     break;
@@ -83,7 +90,7 @@ public class DataBaseManagement {
         while (choice != 9);
     }
 
-    private static void loginPanel() throws IOException, ClassNotFoundException {
+    private static void loginPanel() throws IOException, ClassNotFoundException, InterruptedException {
         AccountManagement accountManagement = new AccountManagement();
         int choice;
         boolean isLoginSuccess = false;
@@ -98,6 +105,15 @@ public class DataBaseManagement {
                     isLoginSuccess = accountManagement.login();
                     if (isLoginSuccess) {
                         System.out.println("Login successful");
+                        Thread.sleep(500);
+                        System.out.println("*****--------------------- 30%");
+                        Thread.sleep(500);
+                        System.out.println("*************------------- 60%");
+                        Thread.sleep(500);
+                        System.out.println("************************** 100%");
+                        Thread.sleep(500);
+                        System.out.println("Loading Completed");
+                        Thread.sleep(500);
                     } else System.err.println("Username or password is wrong");
                     break;
                 case 0:
@@ -110,17 +126,21 @@ public class DataBaseManagement {
     }
 
     private static void displayLoginMenu() {
-        System.out.println("Account Panel");
+        System.out.println("**************************");
+        System.out.println("Welcome to Account Panel");
         System.out.println("1. Create new account");
         System.out.println("2. Login");
         System.out.println("0. Exit");
+        System.out.println("**************************");
+        System.out.println("Enter your choice:");
     }
 
     private static void productManagement() throws IOException, ClassNotFoundException, InterruptedException {
         ProductManagement productManagement = new ProductManagement();
         int choice;
         do {
-            System.out.println("Welcome to Manager Software");
+            System.out.println("**************************");
+            System.out.println("Welcome to Product Panel");
             System.out.println("1. Add new Product");
             System.out.println("2. Show all Product");
             System.out.println("3. Search product by ID");
@@ -130,6 +150,8 @@ public class DataBaseManagement {
             System.out.println("7. Export data to file");
             System.out.println("8. Import data from file");
             System.out.println("9. Back");
+            System.out.println("**************************");
+            System.out.println("Enter your choice: ");
             choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {

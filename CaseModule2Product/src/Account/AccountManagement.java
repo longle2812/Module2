@@ -15,7 +15,8 @@ public class AccountManagement {
     }
 
 
-    public boolean login() {
+    public boolean login() throws IOException, ClassNotFoundException {
+        readFromFile();
         boolean isValid = false;
         System.out.println("Enter username");
         username = sc.nextLine();

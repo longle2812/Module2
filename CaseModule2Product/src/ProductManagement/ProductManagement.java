@@ -4,6 +4,7 @@ import ProductFactory.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -64,27 +65,77 @@ public class ProductManagement {
     }
 
     private void createNewChair(FurnitureAbstractFactory furnitureAbstractFactory) {
-        createNewProduct();
+        createNewProduct("Chair");
         System.out.println("Enter type");
         type = sc.nextLine();
         Chair chair = furnitureAbstractFactory.createChair(id, color, price, weight, type);
         chairList.add(chair);
     }
 
-    private void createNewProduct() {
-        System.out.println("Enter ID");
-        id = sc.nextLine();
-        System.out.println("Enter Color");
-        color = sc.nextLine();
-        System.out.println("Enter Price");
-        price = sc.nextDouble();
-        System.out.println("Enter weight");
-        weight = sc.nextDouble();
+    private void createNewProduct(String product) {
+        id = idGenerator(product);
+        color = colorGenerator();
+        price = priceGenerator();
+        weight = weightGenerator();
+    }
+
+    private double weightGenerator() {
+        boolean isValid = false;
+        while (!isValid) {
+            try {
+                System.out.println("Enter weight");
+                weight = sc.nextDouble();
+                isValid = true;
+            } catch (InputMismatchException e) {
+                System.err.println("Error!");
+                sc.next();
+            }
+        }
         sc.nextLine();
+        return weight;
+    }
+
+    private double priceGenerator() {
+        boolean isValid = false;
+        while (!isValid) {
+            try {
+                System.out.println("Enter Price");
+                price = sc.nextDouble();
+                isValid = true;
+            } catch (InputMismatchException e) {
+                System.err.println("Error!");
+                sc.next();
+            }
+        }
+        sc.nextLine();
+        return price;
+    }
+
+    private String colorGenerator() {
+        String colorRegex = "\\w{3,}";
+        do {
+            System.out.println("Enter Color");
+            color = sc.nextLine();
+        }
+        while (!color.matches(colorRegex));
+        return color;
+    }
+
+    private String idGenerator(String product) {
+        String idRegex = "";
+        if (product.equals("Chair")) {
+            idRegex = "CH\\d{3}";
+        } else if (product.equals("Table")) idRegex = "TB\\d{3}";
+        do {
+            System.out.println("Enter ID (Table - TBxxx, Chair - CHxxx with x is number)");
+            id = sc.nextLine();
+        }
+        while (!id.matches(idRegex));
+        return id;
     }
 
     private void createNewTable(FurnitureAbstractFactory furnitureAbstractFactory) {
-        createNewProduct();
+        createNewProduct("Table");
         System.out.println("Enter brand");
         brand = sc.nextLine();
         Table table = furnitureAbstractFactory.createTable(id, color, price, weight, brand);
@@ -118,7 +169,7 @@ public class ProductManagement {
                 if (product != null) {
                     System.out.println(genericSearch(tableList, findIndex));
                 } else System.out.println("No information");
-            break;
+                break;
             case 2:
                 product = genericSearch(chairList, findIndex);
                 if (product != null) {
@@ -151,7 +202,7 @@ public class ProductManagement {
                 Table table = (Table) genericSearch(tableList, findIndex);
                 if (table != null) {
                     System.out.println("Product is found");
-                    createNewProduct();
+                    createNewProduct("Table");
                     table.setId(id);
                     table.setColor(color);
                     table.setPrice(price);
@@ -164,7 +215,7 @@ public class ProductManagement {
             case 2:
                 Chair chair = (Chair) genericSearch(chairList, findIndex);
                 if (chair != null) {
-                    createNewProduct();
+                    createNewProduct("Chair");
                     chair.setId(id);
                     chair.setColor(color);
                     chair.setPrice(price);
@@ -196,7 +247,7 @@ public class ProductManagement {
     private <T> void genericSort(List<T> list) {
         for (int i = 0; i < list.size() - 1; i++) {
             for (int j = i + 1; j < list.size(); j++) {
-                if (((List<Product>)list).get(i).getPrice() < ((List<Product>)list).get(j).getPrice()) {
+                if (((List<Product>) list).get(i).getPrice() < ((List<Product>) list).get(j).getPrice()) {
                     Product temp = (Product) list.get(i);
                     list.set(i, list.get(j));
                     list.set(j, (T) temp);
@@ -229,15 +280,14 @@ public class ProductManagement {
 
     public void deleteProdcutByID() {
         Product product = searchProductByID();
-        if (product != null){
-            if (product instanceof Table){
+        if (product != null) {
+            if (product instanceof Table) {
                 tableList.remove(product);
             }
-            if (product instanceof Chair){
+            if (product instanceof Chair) {
                 tableList.remove(product);
             }
             System.out.println("Delete product successful");
-        }
-        else System.out.println("No information");
+        } else System.out.println("No information");
     }
 }
