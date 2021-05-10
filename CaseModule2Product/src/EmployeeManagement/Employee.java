@@ -72,7 +72,7 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return "EmployeeManagement.Employee{" +
+        return "Employee{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +

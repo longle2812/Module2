@@ -21,7 +21,7 @@ public class Leader extends Employee{
 
     @Override
     public String toString() {
-        return "EmployeeManagement.Leader{" +
+        return "Leader{" +
                 "id='" + super.getId() + '\'' +
                 ", name='" + super.getName() + '\'' +
                 ", age=" + super.getAge() +

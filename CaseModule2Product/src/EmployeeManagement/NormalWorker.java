@@ -33,7 +33,7 @@ public class NormalWorker extends Employee{
 
     @Override
     public String toString() {
-        return "EmployeeManagement.NormalWorker{" +
+        return "NormalWorker{" +
                 "id='" + super.getId() + '\'' +
                 ", name='" + super.getName() + '\'' +
                 ", age=" + super.getAge() +

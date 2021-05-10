@@ -2,6 +2,7 @@ package EmployeeManagement;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -42,7 +43,8 @@ public class EmployeeManagement {
     }
 
     private void addNewWorkerInfor() {
-        addBasicInfor();
+        System.out.println("Create new Worker");
+        addBasicInfor("Worker");
         System.out.println("Enter speciality");
         speciality = sc.nextLine();
         System.out.println("Enter level");
@@ -50,26 +52,106 @@ public class EmployeeManagement {
     }
 
     private void addNewLeaderInfor() {
-        addBasicInfor();
-        System.out.println("Enter branch");
-        branch = sc.nextLine();
+        System.out.println("Create new Leader");
+        addBasicInfor("Leader");
+        branch = "";
+        while (!branch.matches("HN") && !branch.matches("HCM")) {
+            System.out.println("Enter branch");
+            branch = sc.nextLine();
+        }
+
     }
 
-    private void addBasicInfor() {
-        System.out.println("Enter id");
-        id = sc.nextLine();
-        System.out.println("Enter name");
-        name = sc.nextLine();
-        System.out.println("Enter age");
-        age = sc.nextInt();
+    private void addBasicInfor(String employee) {
+        id = idGenerator(employee);
+        name = nameGenerator();
+        age = ageGenerator();
+        sex = sexGenerator();
+        hometown = hometownGenerator();
+        wage = wageGenerator();
+    }
+
+    private String sexGenerator() {
+        sex = "";
+        while (!sex.equals("male") && !sex.equals("female")) {
+            System.out.println("Enter sex (male/female)");
+            sex = sc.nextLine();
+        }
+        return sex;
+    }
+
+    private int ageGenerator() {
+        boolean isValid = false;
+        while (!isValid) {
+            try {
+                System.out.println("Enter age (18-55 only)");
+                age = sc.nextInt();
+                isValid = true;
+                if (age > 55 || age < 18) {
+                    isValid = false;
+                }
+            } catch (InputMismatchException e) {
+                System.err.println("Error!");
+                sc.next();
+            }
+        }
         sc.nextLine();
-        System.out.println("Enter sex");
-        sex = sc.nextLine();
-        System.out.println("Enter hometown");
-        hometown = sc.nextLine();
-        System.out.println("Enter wage");
-        wage = sc.nextDouble();
+        return age;
+    }
+
+    private double wageGenerator() {
+        boolean isValid = false;
+        while (!isValid) {
+            try {
+                System.out.println("Enter wage");
+                wage = sc.nextInt();
+                isValid = true;
+            } catch (InputMismatchException e) {
+                System.err.println("Error!");
+                sc.next();
+            }
+        }
         sc.nextLine();
+        return wage;
+    }
+
+    private String nameGenerator() {
+        String nameRegex = "(([a-zA-Z]+)\\s?)+";
+        do {
+            System.out.println("Enter name (Word only)");
+            name = sc.nextLine();
+            if (!name.matches(nameRegex)) {
+                System.err.println("Error!");
+            }
+        }
+        while (!name.matches(nameRegex));
+        return name;
+    }
+
+    private String hometownGenerator() {
+        String hometownRegex = "(([a-zA-Z]+)\\s?)+";
+        do {
+            System.out.println("Enter hometown (Word only)");
+            hometown = sc.nextLine();
+            if (!hometown.matches(hometownRegex)) {
+                System.err.println("Error!");
+            }
+        }
+        while (!hometown.matches(hometownRegex));
+        return hometown;
+    }
+
+    private String idGenerator(String employee) {
+        String idRegex = "";
+        if (employee.equals("Worker")) {
+            idRegex = "Wk\\d{3}";
+        } else if (employee.equals("Leader")) idRegex = "Ld\\d{3}";
+        do {
+            System.out.println("Enter ID (Worker - Wkxxx, Leader - Ldxxx with x is number)");
+            id = sc.nextLine();
+        }
+        while (!id.matches(idRegex));
+        return id;
     }
 
     public void showEmployeeList() {
