@@ -21,7 +21,7 @@ public class Table extends Product {
 
     @Override
     public String toString() {
-        return "ProductFactory.Table{" +
+        return "Table{" +
                 "id='" + super.getId() + '\'' +
                 ", color='" + super.getColor() + '\'' +
                 ", price=" + super.getPrice() +

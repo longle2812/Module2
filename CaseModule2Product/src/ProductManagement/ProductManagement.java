@@ -25,13 +25,17 @@ public class ProductManagement {
 
     public void addNewProduct() {
         System.out.println("Choose type:");
-        System.out.println("1. Table");
-        System.out.println("2. Chair");
+        System.out.println("1. Create new table");
+        System.out.println("2. Create new chair");
+        System.out.println("---------------------");
+        System.out.println("Enter your chocie: ");
         int choice = sc.nextInt();
         sc.nextLine();
         System.out.println("Choose material");
-        System.out.println("1. Plastic");
-        System.out.println("2. Wooden");
+        System.out.println("1. Plastic material ");
+        System.out.println("2. Wooden material ");
+        System.out.println("---------------------");
+        System.out.println("Enter your chocie: ");
         int material = sc.nextInt();
         sc.nextLine();
         switch (material) {
@@ -39,11 +43,11 @@ public class ProductManagement {
                 FurnitureAbstractFactory plasticFactory = FurnitureFactory.getFactory(MaterialType.PLASTIC);
                 switch (choice) {
                     case 1:
-                        System.out.println("Add new Plastic Table");
+                        System.out.println("Create new Plastic Table");
                         createNewTable(plasticFactory);
                         break;
                     case 2:
-                        System.out.println("Add new Plastic Chair");
+                        System.out.println("Create new Plastic Chair");
                         createNewChair(plasticFactory);
                         break;
                 }
@@ -52,11 +56,11 @@ public class ProductManagement {
                 FurnitureAbstractFactory woodenFactory = FurnitureFactory.getFactory(MaterialType.WOOD);
                 switch (choice) {
                     case 1:
-                        System.out.println("Add new Wooden Table");
+                        System.out.println("Create new Wooden Table");
                         createNewTable(woodenFactory);
                         break;
                     case 2:
-                        System.out.println("Add new Wooden Chair");
+                        System.out.println("Create new Wooden Chair");
                         createNewChair(woodenFactory);
                         break;
                 }
@@ -70,6 +74,7 @@ public class ProductManagement {
         type = sc.nextLine();
         Chair chair = furnitureAbstractFactory.createChair(id, color, price, weight, type);
         chairList.add(chair);
+        System.out.println("Created successful");
     }
 
     private void createNewProduct(String product) {
@@ -140,19 +145,23 @@ public class ProductManagement {
         brand = sc.nextLine();
         Table table = furnitureAbstractFactory.createTable(id, color, price, weight, brand);
         tableList.add(table);
+        System.out.println("Created successful");
     }
 
     public void showAllProduct() {
         System.out.println("List of Table");
+        System.out.println("*******************");
         for (Table table :
                 tableList) {
             System.out.println(table);
         }
+        System.out.println("*******************");
         System.out.println("List of Chair");
         for (Chair chair :
                 chairList) {
             System.out.println(chair);
         }
+        System.out.println("*******************");
     }
 
     public Product searchProductByID() {
@@ -210,6 +219,7 @@ public class ProductManagement {
                     System.out.println("Enter brand");
                     brand = sc.nextLine();
                     table.setBrand(brand);
+                    System.out.println("Edit successful");
                 }
                 break;
             case 2:
@@ -223,6 +233,7 @@ public class ProductManagement {
                     System.out.println("Enter type");
                     type = sc.nextLine();
                     chair.setType(type);
+                    System.out.println("Edit successful");
                 }
                 break;
         }
@@ -241,6 +252,7 @@ public class ProductManagement {
                 genericSort(chairList);
                 break;
         }
+        System.out.println("List of product after sort");
         showAllProduct();
     }
 

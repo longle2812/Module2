@@ -22,7 +22,7 @@ public class Chair extends Product {
 
     @Override
     public String toString() {
-        return "ProductFactory.Chair{" +
+        return "Chair{" +
                 "id='" + super.getId() + '\'' +
                 ", color='" + super.getColor() + '\'' +
                 ", price=" + super.getPrice() +

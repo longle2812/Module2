@@ -8,5 +8,14 @@ public class PlasticTable extends Table {
         super(id, color, price, weight, brand);
     }
 
-
+    @Override
+    public String toString() {
+        return "Plastic Table{" +
+                "id='" + super.getId() + '\'' +
+                ", color='" + super.getColor() + '\'' +
+                ", price=" + super.getPrice() +
+                ", weight=" + super.getWeight() +
+                ", brand='" + super.getBrand() + '\'' +
+                '}';
+    }
 }
