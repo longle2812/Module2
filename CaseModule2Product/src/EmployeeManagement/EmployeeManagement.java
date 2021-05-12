@@ -56,10 +56,9 @@ public class EmployeeManagement {
         addBasicInfor("Leader");
         branch = "";
         while (!branch.matches("HN") && !branch.matches("HCM")) {
-            System.out.println("Enter branch");
+            System.out.println("Enter branch (HN/HCM)");
             branch = sc.nextLine();
         }
-
     }
 
     private void addBasicInfor(String employee) {

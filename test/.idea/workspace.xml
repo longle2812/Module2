@@ -2,7 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64612ba9-c7f0-4ae3-94e7-df7789e0c8da" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Dictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CaseModule2Product/accountList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../CaseModule2Product/accountList.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CaseModule2Product/chairList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../CaseModule2Product/chairList.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CaseModule2Product/out/production/CaseModule2Product/Account/AccountManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CaseModule2Product/out/production/CaseModule2Product/Account/AccountManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CaseModule2Product/out/production/CaseModule2Product/DataBaseManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CaseModule2Product/out/production/CaseModule2Product/DataBaseManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CaseModule2Product/out/production/CaseModule2Product/EmployeeManagement/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CaseModule2Product/out/production/CaseModule2Product/EmployeeManagement/Employee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CaseModule2Product/out/production/CaseModule2Product/EmployeeManagement/EmployeeManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CaseModule2Product/out/production/CaseModule2Product/EmployeeManagement/EmployeeManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CaseModule2Product/out/production/CaseModule2Product/EmployeeManagement/Leader.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CaseModule2Product/out/production/CaseModule2Product/EmployeeManagement/Leader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CaseModule2Product/out/production/CaseModule2Product/EmployeeManagement/NormalWorker.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CaseModule2Product/out/production/CaseModule2Product/EmployeeManagement/NormalWorker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CaseModule2Product/out/production/CaseModule2Product/ProductManagement/ProductManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CaseModule2Product/out/production/CaseModule2Product/ProductManagement/ProductManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CaseModule2Product/src/Account/AccountManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CaseModule2Product/src/Account/AccountManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CaseModule2Product/src/DataBaseManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CaseModule2Product/src/DataBaseManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CaseModule2Product/src/EmployeeManagement/EmployeeManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CaseModule2Product/src/EmployeeManagement/EmployeeManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CaseModule2Product/src/ProductManagement/ProductManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CaseModule2Product/src/ProductManagement/ProductManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CaseModule2Product/tableList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../CaseModule2Product/tableList.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -100,6 +113,9 @@
       <workItem from="1617956134029" duration="307000" />
       <workItem from="1618800776898" duration="1585000" />
       <workItem from="1618804266722" duration="37000" />
+      <workItem from="1620656297251" duration="16000" />
+      <workItem from="1620716369361" duration="89000" />
+      <workItem from="1620722543276" duration="114000" />
     </task>
     <servers />
   </component>

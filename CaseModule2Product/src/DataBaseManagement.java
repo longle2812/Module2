@@ -1,22 +1,26 @@
 import Account.AccountManagement;
+import Account.User;
 import EmployeeManagement.EmployeeManagement;
 import ProductManagement.ProductManagement;
+import UserManagement.UserManagement;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class DataBaseManagement {
     public static Scanner sc = new Scanner(System.in);
+    public static User user = new User();
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-//        loginPanel();
-        mainMenu();
+        loginPanel();
     }
 
-    private static void mainMenu() throws IOException, ClassNotFoundException, InterruptedException {
+
+    private static void adminMenu() throws IOException, ClassNotFoundException, InterruptedException {
         int choice;
         System.out.println("**************************");
-        System.out.println("Welcome to Management Program");
+        System.out.println("WELCOME TO MANAGER PROGRAM");
         System.out.println("1. Product Management Panel");
         System.out.println("2. Employee Management Panel");
         System.out.println("3. Logout");
@@ -43,7 +47,7 @@ public class DataBaseManagement {
         int choice;
         do {
             System.out.println("**************************");
-            System.out.println("Welcome to Employee Software");
+            System.out.println("WELCOME TO EMPLOYEE PANEL");
             System.out.println("1. Add new Employee");
             System.out.println("2. Show all Employee");
             System.out.println("3. Search employee by ID");
@@ -83,7 +87,7 @@ public class DataBaseManagement {
                     employeeManagement.readFromFile();
                     break;
                 case 9:
-                    mainMenu();
+                    adminMenu();
                     break;
             }
         }
@@ -92,42 +96,99 @@ public class DataBaseManagement {
 
     private static void loginPanel() throws IOException, ClassNotFoundException, InterruptedException {
         AccountManagement accountManagement = new AccountManagement();
-        int choice;
-        boolean isLoginSuccess = false;
+        int choice = -1;
         do {
-            displayLoginMenu();
+            try {
+                displayLoginMenu();
+                choice = sc.nextInt();
+                if (choice < 0 || choice > 2) {
+                    System.err.println("Wrong input");
+                }
+                switch (choice) {
+                    case 1:
+                        accountManagement.createNewAccount();
+                        continue;
+                    case 2:
+                        user = accountManagement.login();
+                        boolean isAdminValid = !user.getUsername().equals("null") && user.getRole().equals("admin");
+                        if (isAdminValid) {
+                            loadingMenu();
+                            adminMenu();
+                        } else if (!user.getUsername().equals("null") && !user.getRole().equals("admin")) {
+                            loadingMenu();
+                            userMenu();
+                        }
+                        else System.err.println("Wrong username or password");
+                        break;
+                    case 0:
+                        System.out.println("Goodbye!");
+                        System.exit(0);
+                        break;
+                    case 3:
+                        accountManagement.showList();
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.err.println("Error!");
+                sc.next();
+            }
+        }
+        while (user.getUsername().equals("null") && choice != 0);
+    }
+
+    private static void userMenu() throws IOException, ClassNotFoundException, InterruptedException {
+        UserManagement userManagement = new UserManagement();
+        int choice;
+        do{
+            System.out.println("**************************");
+            System.out.println("WELCOME TO THE STORE");
+            System.out.println("1. Add items to cart");
+            System.out.println("2. Show cart");
+            System.out.println("3. Delete items in cart");
+            System.out.println("4. Check out");
+            System.out.println("0. Back");
+            System.out.println("**************************");
             choice = sc.nextInt();
-            switch (choice) {
+            sc.nextLine();
+            userManagement.readFromFile();
+            userManagement.importShopingCart(user);
+            switch (choice){
                 case 1:
-                    accountManagement.createNewAccount();
-                    continue;
+                    userManagement.addNewItems(user);
+                    break;
                 case 2:
-                    isLoginSuccess = accountManagement.login();
-                    if (isLoginSuccess) {
-                        System.out.println("Login successful");
-                        Thread.sleep(500);
-                        System.out.println("*****--------------------- 30%");
-                        Thread.sleep(500);
-                        System.out.println("*************------------- 60%");
-                        Thread.sleep(500);
-                        System.out.println("************************** 100%");
-                        Thread.sleep(500);
-                        System.out.println("Loading Completed");
-                        Thread.sleep(500);
-                    } else System.err.println("Username or password is wrong");
+                    userManagement.showCart(user);
+                    break;
+                case 3:
+                    userManagement.deleteItems(user);
+                    break;
+                case 4:
+                    userManagement.checkOut(user);
                     break;
                 case 0:
-                    System.out.println("Goodbye!");
-                    System.exit(0);
+                    loginPanel();
                     break;
             }
         }
-        while (!isLoginSuccess);
+        while(choice!=0);
+    }
+
+    private static void loadingMenu() throws InterruptedException {
+        System.out.println("Login successful");
+        Thread.sleep(500);
+        System.out.println("*****--------------------- 30%");
+        Thread.sleep(500);
+        System.out.println("*************------------- 60%");
+        Thread.sleep(500);
+        System.out.println("************************** 100%");
+        Thread.sleep(500);
+        System.out.println("Loading Completed");
+        Thread.sleep(500);
     }
 
     private static void displayLoginMenu() {
         System.out.println("**************************");
-        System.out.println("Welcome to Account Panel");
+        System.out.println("WELCOME TO ACCOUNT PANEL");
         System.out.println("1. Create new account");
         System.out.println("2. Login");
         System.out.println("0. Exit");
@@ -140,7 +201,7 @@ public class DataBaseManagement {
         int choice;
         do {
             System.out.println("**************************");
-            System.out.println("Welcome to Product Panel");
+            System.out.println("WELCOME TO PRODUCT PANEL");
             System.out.println("1. Add new Product");
             System.out.println("2. Show all Product");
             System.out.println("3. Search product by ID");
@@ -154,6 +215,7 @@ public class DataBaseManagement {
             System.out.println("Enter your choice: ");
             choice = sc.nextInt();
             sc.nextLine();
+            productManagement.readFromFile();
             switch (choice) {
                 case 1:
                     productManagement.addNewProduct();
@@ -180,7 +242,7 @@ public class DataBaseManagement {
                     productManagement.readFromFile();
                     break;
                 case 9:
-                    mainMenu();
+                    adminMenu();
                     break;
             }
         }

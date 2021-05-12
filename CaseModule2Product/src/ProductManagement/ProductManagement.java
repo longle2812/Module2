@@ -23,7 +23,8 @@ public class ProductManagement {
     }
 
 
-    public void addNewProduct() {
+    public void addNewProduct() throws IOException {
+        System.out.println("---------------------");
         System.out.println("Choose type:");
         System.out.println("1. Create new table");
         System.out.println("2. Create new chair");
@@ -31,6 +32,7 @@ public class ProductManagement {
         System.out.println("Enter your chocie: ");
         int choice = sc.nextInt();
         sc.nextLine();
+        System.out.println("---------------------");
         System.out.println("Choose material");
         System.out.println("1. Plastic material ");
         System.out.println("2. Wooden material ");
@@ -66,15 +68,26 @@ public class ProductManagement {
                 }
                 break;
         }
+        writeToFile();
     }
 
     private void createNewChair(FurnitureAbstractFactory furnitureAbstractFactory) {
         createNewProduct("Chair");
-        System.out.println("Enter type");
-        type = sc.nextLine();
+        type = typeGenerator("");
         Chair chair = furnitureAbstractFactory.createChair(id, color, price, weight, type);
         chairList.add(chair);
         System.out.println("Created successful");
+    }
+
+    private String typeGenerator(String type) {
+        while (!type.matches("work") && !type.matches("decoration")) {
+            System.out.println("Enter type (work/decoration)");
+            type = sc.nextLine();
+            if (!type.matches("work") && !type.matches("decoration")){
+                System.err.println("Wrong input");
+            }
+        }
+        return type;
     }
 
     private void createNewProduct(String product) {
@@ -88,7 +101,7 @@ public class ProductManagement {
         boolean isValid = false;
         while (!isValid) {
             try {
-                System.out.println("Enter weight");
+                System.out.println("Enter weight (Kg)");
                 weight = sc.nextDouble();
                 isValid = true;
             } catch (InputMismatchException e) {
@@ -104,7 +117,7 @@ public class ProductManagement {
         boolean isValid = false;
         while (!isValid) {
             try {
-                System.out.println("Enter Price");
+                System.out.println("Enter Price (USD)");
                 price = sc.nextDouble();
                 isValid = true;
             } catch (InputMismatchException e) {
@@ -199,7 +212,7 @@ public class ProductManagement {
         return null;
     }
 
-    public void editInformationByID() {
+    public void editInformationByID() throws IOException {
         System.out.println("1. Table");
         System.out.println("2. Chair");
         int choice = sc.nextInt();
@@ -230,13 +243,13 @@ public class ProductManagement {
                     chair.setColor(color);
                     chair.setPrice(price);
                     chair.setWeight(weight);
-                    System.out.println("Enter type");
-                    type = sc.nextLine();
+                    type = typeGenerator("");
                     chair.setType(type);
                     System.out.println("Edit successful");
                 }
                 break;
         }
+        writeToFile();
     }
 
     public void sortByPrice() {
@@ -290,7 +303,7 @@ public class ProductManagement {
         objectChair.close();
     }
 
-    public void deleteProdcutByID() {
+    public void deleteProdcutByID() throws IOException {
         Product product = searchProductByID();
         if (product != null) {
             if (product instanceof Table) {
@@ -301,5 +314,6 @@ public class ProductManagement {
             }
             System.out.println("Delete product successful");
         } else System.out.println("No information");
+        writeToFile();
     }
 }

@@ -1,51 +1,50 @@
 package Account;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class AccountManagement {
-    static Map<String, String> accounts = new HashMap<>();
+    static List<User> accounts = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
     private String username;
     private String password;
+    private String role;
 
     public AccountManagement() {
     }
 
 
-    public boolean login() throws IOException, ClassNotFoundException {
+    public User login() throws IOException, ClassNotFoundException {
         readFromFile();
-        boolean isValid = false;
+        User user = new User("null","null","null");
         System.out.println("Enter username");
         username = sc.nextLine();
         System.out.println("Enter password");
         password = sc.nextLine();
-        for (Map.Entry<String, String> user : accounts.entrySet()
-        ) {
-            if (username.equals(user.getKey())) {
-                if (password.equals(user.getValue())) {
-                    isValid = true;
+        for (User account :
+                accounts) {
+            if (username.equals(account.getUsername())) {
+                if (password.equals(account.getPassword())) {
+                    user = account;
                 }
             }
         }
-        return isValid;
+        return user;
     }
 
     public boolean checkNewAccount() throws IOException, ClassNotFoundException {
         readFromFile();
         boolean isValid = true;
-        for (Map.Entry<String, String> user : accounts.entrySet()
-        ) {
-            if (username.equals(user.getKey())) {
+        for (User account :
+                accounts) {
+            if (account.getUsername().equals(username)) {
                 isValid = false;
             }
         }
         return isValid;
     }
 
-    public void createNewAccount() throws IOException, ClassNotFoundException {
+    public void createNewAccount() throws IOException, ClassNotFoundException, InterruptedException {
         readFromFile();
         String userRegex = "(?=.*?[A-Z])[a-zA-Z0-9]{8,15}";
         do {
@@ -58,11 +57,19 @@ public class AccountManagement {
         while (!username.matches(userRegex));
         System.out.println("Enter your password");
         password = sc.nextLine();
+        role = "";
+        while (!role.equals("admin") && !role.equals("vipMember") && !role.equals("member")) {
+            System.out.println("Enter role (admin//vipMember//member)");
+            role = sc.nextLine();
+        }
         if (checkNewAccount()) {
-            accounts.put(username, password);
+            accounts.add(new User(username, password, role));
             writeToFile();
             System.out.println("Add successful");
-        } else System.err.println("Account existed");
+        } else {
+            System.err.println("Account existed");
+            Thread.sleep(100);
+        }
     }
 
     public void writeToFile() throws IOException {
@@ -75,7 +82,15 @@ public class AccountManagement {
     public void readFromFile() throws IOException, ClassNotFoundException {
         FileInputStream accountFile = new FileInputStream("accountList.txt");
         ObjectInputStream accountObject = new ObjectInputStream(accountFile);
-        accounts = (Map<String, String>) accountObject.readObject();
+        accounts = (List<User>) accountObject.readObject();
         accountObject.close();
+    }
+
+    public void showList() throws IOException, ClassNotFoundException {
+        readFromFile();
+        for (User account :
+                accounts) {
+            System.out.println(account);
+        }
     }
 }
