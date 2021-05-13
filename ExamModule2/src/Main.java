@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -17,37 +18,44 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws IOException {
         ContactManagement contactManagement = new ContactManagement();
-        int choice;
+        int choice = -1;
+        contactManagement.readContact();
         do {
-            displayMenu();
-            choice = sc.nextInt();
-            sc.nextLine();
-            switch (choice){
-                case 1:
-                    contactManagement.showList();
-                    break;
-                case 2:
-                    contactManagement.addNewContact();
-                    break;
-                case 3:
-                    contactManagement.editContact();
-                    break;
-                case 4:
-                    contactManagement.deleteContact();
-                    break;
-                case 5:
-                    contactManagement.searchContact();
-                    break;
-                case 6:
-                    contactManagement.readContact();
-                    break;
-                case 7:
-                    contactManagement.writeContact();
-                    break;
-                case 8:
-                    System.out.println(GOODBYE);
-                    System.exit(0);
-                    break;
+            try {
+                displayMenu();
+                choice = sc.nextInt();
+                sc.nextLine();
+                switch (choice) {
+                    case 1:
+                        contactManagement.showList();
+                        break;
+                    case 2:
+                        contactManagement.addNewContact();
+                        break;
+                    case 3:
+                        contactManagement.editContact();
+                        break;
+                    case 4:
+                        contactManagement.deleteContact();
+                        break;
+                    case 5:
+                        contactManagement.searchContact();
+                        break;
+                    case 6:
+                        contactManagement.readContact();
+                        break;
+                    case 7:
+                        contactManagement.writeContact();
+                        break;
+                    case 8:
+                        System.out.println(GOODBYE);
+                        System.exit(0);
+                        break;
+                }
+            }
+            catch (InputMismatchException e){
+                System.err.println("Error!");
+                sc.next();
             }
         }
         while (choice != 0);
