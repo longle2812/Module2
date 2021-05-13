@@ -99,9 +99,10 @@ public class DataBaseManagement {
         int choice = -1;
         do {
             try {
+                accountManagement.readFromFile();
                 displayLoginMenu();
                 choice = sc.nextInt();
-                if (choice < 0 || choice > 2) {
+                if (choice < 0 || choice > 4) {
                     System.err.println("Wrong input");
                 }
                 switch (choice) {
@@ -127,13 +128,16 @@ public class DataBaseManagement {
                     case 3:
                         accountManagement.showList();
                         break;
+                    case 4:
+                        accountManagement.deleteAccount();
                 }
             } catch (InputMismatchException e) {
                 System.err.println("Error!");
                 sc.next();
             }
         }
-        while (user.getUsername().equals("null") && choice != 0);
+//        while (user.getUsername().equals("null") && choice != 0);
+        while ( choice != 0);
     }
 
     private static void userMenu() throws IOException, ClassNotFoundException, InterruptedException {
@@ -191,6 +195,7 @@ public class DataBaseManagement {
         System.out.println("WELCOME TO ACCOUNT PANEL");
         System.out.println("1. Create new account");
         System.out.println("2. Login");
+        System.out.println("3. Show all account");
         System.out.println("0. Exit");
         System.out.println("**************************");
         System.out.println("Enter your choice:");

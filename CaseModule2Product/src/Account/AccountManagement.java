@@ -87,10 +87,23 @@ public class AccountManagement {
     }
 
     public void showList() throws IOException, ClassNotFoundException {
-        readFromFile();
         for (User account :
                 accounts) {
             System.out.println(account);
+        }
+    }
+
+    public void deleteAccount() throws IOException {
+        System.out.println("Enter username");
+        username = sc.nextLine();
+        for (User account :
+                accounts) {
+            if (account.getUsername().equals(username)){
+                accounts.remove(account);
+                System.out.println("Delete successful");
+                writeToFile();
+                break;
+            }
         }
     }
 }
