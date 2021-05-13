@@ -11,6 +11,11 @@ public class ContactManagement {
     public static final String ENTER_SEX = "Enter sex";
     public static final String ENTER_FULL_NAME = "Enter full name";
     public static final String ENTER_GROUP = "Enter group";
+    public static final String ENTER_PHONE_NUMBER_10_DIGIT_NUMBERS = "Enter phone number (10 digit numbers)";
+    public static final String CONTACT_LIST = "Contact List";
+    public static final String NO_RESULT_WITH_THIS_NUMBER = "No result with this number";
+    public static final String ENTER_PHONE_NUMBER_PRESS_ENTER_TO_EXIT = "Enter phone number (press Enter to exit)";
+    public static final String DATA_CONTACTS_CSV = "data/contacts.csv";
     Scanner sc = new Scanner(System.in);
     List<Contact> contactList = new ArrayList<>();
     private String phoneNumber;
@@ -35,7 +40,6 @@ public class ContactManagement {
     }
 
     private void newEmail() {
-
         do {
             System.out.println(ENTER_EMAIL);
             email = sc.nextLine();
@@ -73,17 +77,17 @@ public class ContactManagement {
 
     private void newPhoneNumber() {
         do {
-            System.out.println("Enter phone number (10 digit numbers)");
+            System.out.println(ENTER_PHONE_NUMBER_10_DIGIT_NUMBERS);
             phoneNumber = sc.nextLine();
             if (!phoneNumber.matches(phoneRegex)) {
-                System.err.println("Wrong input");
+                System.err.println(WRONG_INPUT);
             }
         }
         while (!phoneNumber.matches(phoneRegex));
     }
 
     public void showList() {
-        System.out.println("Contact List");
+        System.out.println(CONTACT_LIST);
         for (Contact contact :
                 contactList) {
             if (contact.getPhoneNumber().equals("Số điện thoại")) continue;
@@ -106,33 +110,37 @@ public class ContactManagement {
                 break;
             }
             if (contact != null) {
-                newGroup();
-                newFullName();
-                newSex();
-                newAddress();
-                newDOB();
-                newEmail();
-                contact.setGroup(group);
-                contact.setFullName(name);
-                contact.setSex(sex);
-                contact.setAddress(address);
-                contact.setDob(dob);
-                contact.setEmail(email);
+                editContact(contact);
             } else {
-                System.out.println("No result with this number");
+                System.out.println(NO_RESULT_WITH_THIS_NUMBER);
             }
         }
         while (contact == null);
     }
 
+    private void editContact(Contact contact) {
+        newGroup();
+        newFullName();
+        newSex();
+        newAddress();
+        newDOB();
+        newEmail();
+        contact.setGroup(group);
+        contact.setFullName(name);
+        contact.setSex(sex);
+        contact.setAddress(address);
+        contact.setDob(dob);
+        contact.setEmail(email);
+    }
+
     private void checkPhoneNumberWithEnterKey() {
         do {
-            System.out.println("Enter phone number (press Enter to exit)");
+            System.out.println(ENTER_PHONE_NUMBER_PRESS_ENTER_TO_EXIT);
             phoneNumber = sc.nextLine();
             if (phoneNumber.matches("")) {
                 break;
             } else if (!phoneNumber.matches(phoneRegex)) {
-                System.err.println("Wrong input");
+                System.err.println(WRONG_INPUT);
             }
         }
         while (!phoneNumber.matches(phoneRegex));
@@ -154,7 +162,7 @@ public class ContactManagement {
         if(contact != null) {
             contactList.remove(contact);
         }
-        else System.out.println("No result with this number");
+        else System.out.println(WRONG_INPUT);
     }
 
     public void searchContact() {
@@ -169,11 +177,11 @@ public class ContactManagement {
                             ", Address: " + contact.getAddress()
             );
         }
-        else System.out.println("No result with this number");
+        else System.out.println(WRONG_INPUT);
     }
 
     public void writeContact() throws IOException {
-        FileWriter writer = new FileWriter("data/contacts.csv");
+        FileWriter writer = new FileWriter(DATA_CONTACTS_CSV);
         writer.write("Số điện thoại,Nhóm,Họ tên,Giới tính,Địa chỉ,Ngày sinh,Email\n");
         for (Contact contact :
                 contactList) {
@@ -190,7 +198,7 @@ public class ContactManagement {
 
 
     public void readContact() throws IOException {
-        FileReader fileReader = new FileReader("data/contacts.csv");
+        FileReader fileReader = new FileReader(DATA_CONTACTS_CSV);
         BufferedReader reader = new BufferedReader(fileReader);
         String line = null;
         while ((line = reader.readLine()) != null){
