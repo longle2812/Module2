@@ -1,8 +1,9 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ContactManagement contactManagement = new ContactManagement();
         int choice;
         do {
@@ -36,8 +37,10 @@ public class Main {
                     contactManagement.searchContact();
                     break;
                 case 6:
+                    contactManagement.readContact();
                     break;
                 case 7:
+                    contactManagement.writeContact();
                     break;
                 case 8:
                     System.out.println("Goodbye!");

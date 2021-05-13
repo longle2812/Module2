@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +13,7 @@ public class ContactManagement {
     private String address;
     private String dob;
     private String email;
+    private String phoneRegex = "^\\d{10}$";
 
     public void addNewContact() {
         newPhoneNumber();
@@ -50,26 +52,33 @@ public class ContactManagement {
     }
 
     private void newGroup() {
-        System.out.println("Enter group");
-        group = sc.nextLine();
+        String groupRegex = "\\w";
+        do{
+            System.out.println("Enter group");
+            group = sc.nextLine();
+            if (!phoneNumber.matches(phoneRegex)) {
+                System.err.println("Wrong input");
+            }
+        }
+        while (!group.matches(groupRegex));
     }
 
     private void newPhoneNumber() {
-        String phoneRegex = "^(\\d{3,})-(\\d{4,}-(\\d{3,}))";
-//        do {
-            System.out.println("Enter phone number (xxx-xxxx-xxx)");
+        do {
+            System.out.println("Enter phone number (10 digit numbers)");
             phoneNumber = sc.nextLine();
-//            if (!phoneNumber.matches(phoneRegex)) {
-//                System.err.println("Wrong input");
-//            }
-//        }
-//        while (!phoneNumber.matches(phoneRegex));
+            if (!phoneNumber.matches(phoneRegex)) {
+                System.err.println("Wrong input");
+            }
+        }
+        while (!phoneNumber.matches(phoneRegex));
     }
 
     public void showList() {
         System.out.println("Contact List");
         for (Contact contact :
                 contactList) {
+            if (contact.getPhoneNumber().equals("Số điện thoại")) continue;
             System.out.println(
                     "Phone number: " + contact.getPhoneNumber() +
                             ", Group: " + contact.getGroup() +
@@ -82,12 +91,12 @@ public class ContactManagement {
 
     public void editContact() {
         Contact contact;
-        String phoneRegex = ""
         do {
-            System.out.println("Enter phone number");
-            phoneNumber = sc.nextLine();
-
+            checkPhoneNumberWithEnterKey();
             contact = findContactByPhone();
+            if (phoneNumber.matches("")){
+                break;
+            }
             if (contact != null) {
                 newGroup();
                 newFullName();
@@ -108,6 +117,19 @@ public class ContactManagement {
         while (contact == null);
     }
 
+    private void checkPhoneNumberWithEnterKey() {
+        do {
+            System.out.println("Enter phone number (press Enter to exit)");
+            phoneNumber = sc.nextLine();
+            if (phoneNumber.matches("")) {
+                break;
+            } else if (!phoneNumber.matches(phoneRegex)) {
+                System.err.println("Wrong input");
+            }
+        }
+        while (!phoneNumber.matches(phoneRegex));
+    }
+
     private Contact findContactByPhone() {
         for (Contact contact :
                 contactList) {
@@ -119,6 +141,7 @@ public class ContactManagement {
     }
 
     public void deleteContact() {
+        checkPhoneNumberWithEnterKey();
         Contact contact = findContactByPhone();
         if(contact != null) {
             contactList.remove(contact);
@@ -127,6 +150,7 @@ public class ContactManagement {
     }
 
     public void searchContact() {
+        checkPhoneNumberWithEnterKey();
         Contact contact = findContactByPhone();
         if(contact != null) {
             System.out.println(
@@ -138,5 +162,40 @@ public class ContactManagement {
             );
         }
         else System.out.println("No result with this number");
+    }
+
+    public void writeContact() throws IOException {
+        FileWriter writer = new FileWriter("data/contacts.csv");
+        writer.write("Số điện thoại,Nhóm,Họ tên,Giới tính,Địa chỉ,Ngày sinh,Email\n");
+        for (Contact contact :
+                contactList) {
+            writer.write(contact.getPhoneNumber()+","+
+                    contact.getGroup()+","+
+                    contact.getFullName()+","+
+                    contact.getSex()+","+
+                    contact.getAddress()+","+
+                    contact.getDob()+","+
+                    contact.getEmail()+"\n");
+        }
+        writer.close();
+    }
+
+
+    public void readContact() throws IOException {
+        FileReader fileReader = new FileReader("data/contacts.csv");
+        BufferedReader reader = new BufferedReader(fileReader);
+        String line = null;
+        while ((line = reader.readLine()) != null){
+            String[] result = line.split(",");
+            if (result.length == 7){
+            phoneNumber = result[0];
+            group = result[1];
+            name = result[2];
+            sex = result[3];
+            address = result[4];
+            dob = result[5];
+            email = result[6];
+            contactList.add(new Contact(phoneNumber, group,name,sex,address,dob,email));}
+        }
     }
 }
