@@ -15,11 +15,13 @@ public class Main {
     public static final String EXIT = "8. Exit";
     public static final String YOUR_CHOICE = "Your choice: ";
     public static final String GOODBYE = "Goodbye!";
+    public static final String IMPORT_SUCCESSFUL = "Import Successful";
+    public static final String EXPORT_SUCCESSFUL = "Export Successful";
+    public static final String ERROR = "Error!";
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws IOException {
         ContactManagement contactManagement = new ContactManagement();
         int choice = -1;
-        contactManagement.readContact();
         do {
             try {
                 displayMenu();
@@ -43,9 +45,11 @@ public class Main {
                         break;
                     case 6:
                         contactManagement.readContact();
+                        System.out.println(IMPORT_SUCCESSFUL);
                         break;
                     case 7:
                         contactManagement.writeContact();
+                        System.out.println(EXPORT_SUCCESSFUL);
                         break;
                     case 8:
                         System.out.println(GOODBYE);
@@ -54,7 +58,7 @@ public class Main {
                 }
             }
             catch (InputMismatchException e){
-                System.err.println("Error!");
+                System.err.println(ERROR);
                 sc.next();
             }
         }

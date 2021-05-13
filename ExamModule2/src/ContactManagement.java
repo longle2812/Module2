@@ -16,6 +16,12 @@ public class ContactManagement {
     public static final String NO_RESULT_WITH_THIS_NUMBER = "No result with this number";
     public static final String ENTER_PHONE_NUMBER_PRESS_ENTER_TO_EXIT = "Enter phone number (press Enter to exit)";
     public static final String DATA_CONTACTS_CSV = "data/contacts.csv";
+    public static final String EDIT_SUCCESSFUL_PRESS_ENTER_TO_CONTINUE = "Edit successful! Press Enter to continue";
+    public static final String DELETE_CONTACT_SUCCESSFUL = "Delete contact successful";
+    public static final String PRESS_ENTER_TO_CONTINUE = "Press Enter to continue";
+    public static final String SEARCH_SUCCESSFUL = "Search Successful";
+    public static final String BACK_TO_MAIN_MENU = "Back to main menu";
+    public static final String CONTACT_FOUND = "Contact Found";
     Scanner sc = new Scanner(System.in);
     List<Contact> contactList = new ArrayList<>();
     private String phoneNumber;
@@ -99,26 +105,34 @@ public class ContactManagement {
                             ", Address: " + contact.getAddress()
             );
         }
+        System.out.println(PRESS_ENTER_TO_CONTINUE);
+        sc.nextLine();
     }
 
     public void editContact() {
         Contact contact;
         do {
             checkPhoneNumberWithEnterKey();
-            contact = findContactByPhone();
-            if (phoneNumber.matches("")){
+            if (!phoneNumber.equals("")) {
+                contact = findContactByPhone();
+                if (contact != null) {
+                    editContact(contact);
+                } else {
+                    System.out.println(NO_RESULT_WITH_THIS_NUMBER);
+                }
+            }
+            else {
+                System.out.println(BACK_TO_MAIN_MENU);
                 break;
-            }
-            if (contact != null) {
-                editContact(contact);
-            } else {
-                System.out.println(NO_RESULT_WITH_THIS_NUMBER);
-            }
+            };
         }
         while (contact == null);
+        System.out.println(PRESS_ENTER_TO_CONTINUE);
+        sc.nextLine();
     }
 
     private void editContact(Contact contact) {
+        System.out.println(CONTACT_FOUND);
         newGroup();
         newFullName();
         newSex();
@@ -131,6 +145,8 @@ public class ContactManagement {
         contact.setAddress(address);
         contact.setDob(dob);
         contact.setEmail(email);
+        System.out.println(EDIT_SUCCESSFUL_PRESS_ENTER_TO_CONTINUE);
+        sc.nextLine();
     }
 
     private void checkPhoneNumberWithEnterKey() {
@@ -158,31 +174,42 @@ public class ContactManagement {
 
     public void deleteContact() {
         checkPhoneNumberWithEnterKey();
-        Contact contact = findContactByPhone();
-        if(contact != null) {
-            contactList.remove(contact);
+        if (!phoneNumber.equals("")) {
+            Contact contact = findContactByPhone();
+            if (contact != null) {
+                contactList.remove(contact);
+                System.out.println(DELETE_CONTACT_SUCCESSFUL);
+            } else System.out.println(WRONG_INPUT);
         }
-        else System.out.println(WRONG_INPUT);
+        else {
+            System.out.println(BACK_TO_MAIN_MENU);
+        }
+        System.out.println(PRESS_ENTER_TO_CONTINUE);
+        sc.nextLine();
     }
 
     public void searchContact() {
         checkPhoneNumberWithEnterKey();
-        Contact contact = findContactByPhone();
-        if(contact != null) {
-            System.out.println(
-                    "Phone number: " + contact.getPhoneNumber() +
-                            ", Group: " + contact.getGroup() +
-                            ", Full name: " + contact.getFullName() +
-                            ", Sex: " + contact.getSex() +
-                            ", Address: " + contact.getAddress()
-            );
+        if (!phoneNumber.equals("")) {
+            Contact contact = findContactByPhone();
+            if (contact != null) {
+                System.out.println(SEARCH_SUCCESSFUL);
+                System.out.println(
+                        "Phone number: " + contact.getPhoneNumber() +
+                                ", Group: " + contact.getGroup() +
+                                ", Full name: " + contact.getFullName() +
+                                ", Sex: " + contact.getSex() +
+                                ", Address: " + contact.getAddress()
+                );
+            } else System.out.println(NO_RESULT_WITH_THIS_NUMBER);
         }
-        else System.out.println(WRONG_INPUT);
+        else System.out.println(BACK_TO_MAIN_MENU);
+        System.out.println(PRESS_ENTER_TO_CONTINUE);
+        sc.nextLine();
     }
 
     public void writeContact() throws IOException {
         FileWriter writer = new FileWriter(DATA_CONTACTS_CSV);
-        writer.write("Số điện thoại,Nhóm,Họ tên,Giới tính,Địa chỉ,Ngày sinh,Email\n");
         for (Contact contact :
                 contactList) {
             writer.write(contact.getPhoneNumber()+","+
@@ -201,6 +228,7 @@ public class ContactManagement {
         FileReader fileReader = new FileReader(DATA_CONTACTS_CSV);
         BufferedReader reader = new BufferedReader(fileReader);
         String line = null;
+        contactList = new ArrayList<>();
         while ((line = reader.readLine()) != null){
             String[] result = line.split(",");
             if (result.length == 7){
