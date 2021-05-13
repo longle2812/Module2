@@ -4,6 +4,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ContactManagement {
+    public static final String ENTER_EMAIL = "Enter email";
+    public static final String WRONG_INPUT = "Wrong input";
+    public static final String ENTER_DATE_OF_BIRTH = "Enter date of birth";
+    public static final String ENTER_ADDRESS = "Enter address";
+    public static final String ENTER_SEX = "Enter sex";
+    public static final String ENTER_FULL_NAME = "Enter full name";
+    public static final String ENTER_GROUP = "Enter group";
     Scanner sc = new Scanner(System.in);
     List<Contact> contactList = new ArrayList<>();
     private String phoneNumber;
@@ -14,6 +21,7 @@ public class ContactManagement {
     private String dob;
     private String email;
     private String phoneRegex = "^\\d{10}$";
+    private String emailRegex = "^(.*?)+@(.*?)(\\.(.*?))+$";
 
     public void addNewContact() {
         newPhoneNumber();
@@ -27,40 +35,40 @@ public class ContactManagement {
     }
 
     private void newEmail() {
-        System.out.println("Enter email");
-        email = sc.nextLine();
+
+        do {
+            System.out.println(ENTER_EMAIL);
+            email = sc.nextLine();
+            if (!email.matches(emailRegex)){
+                System.err.println(WRONG_INPUT);
+            }
+        }
+        while (!email.matches(emailRegex));
     }
 
     private void newDOB() {
-        System.out.println("Enter date of birth");
+        System.out.println(ENTER_DATE_OF_BIRTH);
         dob = sc.nextLine();
     }
 
     private void newAddress() {
-        System.out.println("Enter address");
+        System.out.println(ENTER_ADDRESS);
         address = sc.nextLine();
     }
 
     private void newSex() {
-        System.out.println("Enter sex");
+        System.out.println(ENTER_SEX);
         sex = sc.nextLine();
     }
 
     private void newFullName() {
-        System.out.println("Enter full name");
-        name = sc.nextLine();
+            System.out.println(ENTER_FULL_NAME);
+            name = sc.nextLine();
     }
 
     private void newGroup() {
-        String groupRegex = "\\w";
-        do{
-            System.out.println("Enter group");
+            System.out.println(ENTER_GROUP);
             group = sc.nextLine();
-            if (!phoneNumber.matches(phoneRegex)) {
-                System.err.println("Wrong input");
-            }
-        }
-        while (!group.matches(groupRegex));
     }
 
     private void newPhoneNumber() {

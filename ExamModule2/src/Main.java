@@ -2,22 +2,24 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
+    public static final String CONTACT_MANAGEMENT_PROGRAM = "Contact Management Program";
+    public static final String CHOOSE_FUNCTION = "Choose function:";
+    public static final String SHOW_LIST = "1. Show list";
+    public static final String ADD_NEW = "2. Add new";
+    public static final String EDIT = "3. Edit";
+    public static final String DELETE = "4. Delete";
+    public static final String SEARCH = "5. Search";
+    public static final String IMPORT = "6. Import";
+    public static final String EXPORT = "7. Export";
+    public static final String EXIT = "8. Exit";
+    public static final String YOUR_CHOICE = "Your choice: ";
+    public static final String GOODBYE = "Goodbye!";
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws IOException {
         ContactManagement contactManagement = new ContactManagement();
         int choice;
         do {
-            System.out.println("Contact Management Program");
-            System.out.println("Choose function:");
-            System.out.println("1. Show list");
-            System.out.println("2. Add new");
-            System.out.println("3. Edit");
-            System.out.println("4. Delete");
-            System.out.println("5. Search");
-            System.out.println("6. Import");
-            System.out.println("7. Export");
-            System.out.println("8. Exit");
-            System.out.println("Your choice: ");
+            displayMenu();
             choice = sc.nextInt();
             sc.nextLine();
             switch (choice){
@@ -43,11 +45,25 @@ public class Main {
                     contactManagement.writeContact();
                     break;
                 case 8:
-                    System.out.println("Goodbye!");
+                    System.out.println(GOODBYE);
                     System.exit(0);
                     break;
             }
         }
         while (choice != 0);
+    }
+
+    private static void displayMenu() {
+        System.out.println(CONTACT_MANAGEMENT_PROGRAM);
+        System.out.println(CHOOSE_FUNCTION);
+        System.out.println(SHOW_LIST);
+        System.out.println(ADD_NEW);
+        System.out.println(EDIT);
+        System.out.println(DELETE);
+        System.out.println(SEARCH);
+        System.out.println(IMPORT);
+        System.out.println(EXPORT);
+        System.out.println(EXIT);
+        System.out.println(YOUR_CHOICE);
     }
 }
