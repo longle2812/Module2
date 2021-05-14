@@ -22,6 +22,11 @@ public class ContactManagement {
     public static final String SEARCH_SUCCESSFUL = "Search Successful";
     public static final String BACK_TO_MAIN_MENU = "Back to main menu";
     public static final String CONTACT_FOUND = "Contact Found";
+    public static final String DELETE_FAILED = "Delete Failed";
+    public static final String DELETE_THIS_NUMBER_ENTER_Y_TO_DELETE = "Delete this number? (Enter Y to delete)";
+    public static final String DO_YOU_WANT_TO_UPDATE_FILE = "Do you want to override file?";
+    public static final String UPDATE_FILE_SUCCESSFUL = "Update file successful";
+    public static final String EXPORT_FAILED = "Export failed";
     Scanner sc = new Scanner(System.in);
     List<Contact> contactList = new ArrayList<>();
     private String phoneNumber;
@@ -31,8 +36,7 @@ public class ContactManagement {
     private String address;
     private String dob;
     private String email;
-    private String phoneRegex = "^\\d{10}$";
-    private String emailRegex = "^(.*?)+@(.*?)(\\.(.*?))+$";
+    private final String phoneRegex = "^\\d{10}$";
 
     public void addNewContact() {
         newPhoneNumber();
@@ -46,10 +50,11 @@ public class ContactManagement {
     }
 
     private void newEmail() {
+        String emailRegex = "^(.*?)+@(.*?)(\\.(.*?))+$";
         do {
             System.out.println(ENTER_EMAIL);
             email = sc.nextLine();
-            if (!email.matches(emailRegex)){
+            if (!email.matches(emailRegex)) {
                 System.err.println(WRONG_INPUT);
             }
         }
@@ -72,13 +77,13 @@ public class ContactManagement {
     }
 
     private void newFullName() {
-            System.out.println(ENTER_FULL_NAME);
-            name = sc.nextLine();
+        System.out.println(ENTER_FULL_NAME);
+        name = sc.nextLine();
     }
 
     private void newGroup() {
-            System.out.println(ENTER_GROUP);
-            group = sc.nextLine();
+        System.out.println(ENTER_GROUP);
+        group = sc.nextLine();
     }
 
     private void newPhoneNumber() {
@@ -120,11 +125,10 @@ public class ContactManagement {
                 } else {
                     System.out.println(NO_RESULT_WITH_THIS_NUMBER);
                 }
-            }
-            else {
+            } else {
                 System.out.println(BACK_TO_MAIN_MENU);
                 break;
-            };
+            }
         }
         while (contact == null);
         System.out.println(PRESS_ENTER_TO_CONTINUE);
@@ -177,11 +181,14 @@ public class ContactManagement {
         if (!phoneNumber.equals("")) {
             Contact contact = findContactByPhone();
             if (contact != null) {
-                contactList.remove(contact);
-                System.out.println(DELETE_CONTACT_SUCCESSFUL);
+                System.out.println(DELETE_THIS_NUMBER_ENTER_Y_TO_DELETE);
+                String choice = sc.nextLine();
+                if (choice.equals("Y")) {
+                    contactList.remove(contact);
+                    System.out.println(DELETE_CONTACT_SUCCESSFUL);
+                } else System.out.println(DELETE_FAILED);
             } else System.out.println(WRONG_INPUT);
-        }
-        else {
+        } else {
             System.out.println(BACK_TO_MAIN_MENU);
         }
         System.out.println(PRESS_ENTER_TO_CONTINUE);
@@ -193,53 +200,66 @@ public class ContactManagement {
         if (!phoneNumber.equals("")) {
             Contact contact = findContactByPhone();
             if (contact != null) {
-                System.out.println(SEARCH_SUCCESSFUL);
-                System.out.println(
-                        "Phone number: " + contact.getPhoneNumber() +
-                                ", Group: " + contact.getGroup() +
-                                ", Full name: " + contact.getFullName() +
-                                ", Sex: " + contact.getSex() +
-                                ", Address: " + contact.getAddress()
-                );
+                displaySearchResult(contact);
             } else System.out.println(NO_RESULT_WITH_THIS_NUMBER);
-        }
-        else System.out.println(BACK_TO_MAIN_MENU);
+        } else System.out.println(BACK_TO_MAIN_MENU);
         System.out.println(PRESS_ENTER_TO_CONTINUE);
         sc.nextLine();
     }
 
+    private void displaySearchResult(Contact contact) {
+        System.out.println(SEARCH_SUCCESSFUL);
+        System.out.println(
+                "Phone number: " + contact.getPhoneNumber() +
+                        ", Group: " + contact.getGroup() +
+                        ", Full name: " + contact.getFullName() +
+                        ", Sex: " + contact.getSex() +
+                        ", Address: " + contact.getAddress()
+        );
+    }
+
     public void writeContact() throws IOException {
         FileWriter writer = new FileWriter(DATA_CONTACTS_CSV);
-        for (Contact contact :
-                contactList) {
-            writer.write(contact.getPhoneNumber()+","+
-                    contact.getGroup()+","+
-                    contact.getFullName()+","+
-                    contact.getSex()+","+
-                    contact.getAddress()+","+
-                    contact.getDob()+","+
-                    contact.getEmail()+"\n");
+        System.out.println(DO_YOU_WANT_TO_UPDATE_FILE);
+        String choice = sc.nextLine();
+        if (choice.equals("Y")) {
+            for (Contact contact :
+                    contactList) {
+                writer.write(contact.getPhoneNumber() + "," +
+                        contact.getGroup() + "," +
+                        contact.getFullName() + "," +
+                        contact.getSex() + "," +
+                        contact.getAddress() + "," +
+                        contact.getDob() + "," +
+                        contact.getEmail() + "\n");
+            }
+            System.out.println(UPDATE_FILE_SUCCESSFUL);
+            writer.close();
+        } else {
+            System.out.println(EXPORT_FAILED);
+            System.out.println(PRESS_ENTER_TO_CONTINUE);
+            sc.nextLine();
         }
-        writer.close();
     }
 
 
     public void readContact() throws IOException {
         FileReader fileReader = new FileReader(DATA_CONTACTS_CSV);
         BufferedReader reader = new BufferedReader(fileReader);
-        String line = null;
+        String line;
         contactList = new ArrayList<>();
-        while ((line = reader.readLine()) != null){
+        while ((line = reader.readLine()) != null) {
             String[] result = line.split(",");
-            if (result.length == 7){
-            phoneNumber = result[0];
-            group = result[1];
-            name = result[2];
-            sex = result[3];
-            address = result[4];
-            dob = result[5];
-            email = result[6];
-            contactList.add(new Contact(phoneNumber, group,name,sex,address,dob,email));}
+            if (result.length == 7) {
+                phoneNumber = result[0];
+                group = result[1];
+                name = result[2];
+                sex = result[3];
+                address = result[4];
+                dob = result[5];
+                email = result[6];
+                contactList.add(new Contact(phoneNumber, group, name, sex, address, dob, email));
+            }
         }
     }
 }
